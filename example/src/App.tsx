@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet } from 'react-native';
 import { multiply } from 'poc-pos-sdk';
+import { Text, View, StyleSheet } from 'react-native';
 
 const result = multiply(3, 7);
 

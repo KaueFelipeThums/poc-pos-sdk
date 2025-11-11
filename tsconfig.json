@@ -1,8 +1,11 @@
 {
+  "extends": "@react-native/typescript-config",
   "compilerOptions": {
+    "baseUrl": ".",
     "rootDir": ".",
     "paths": {
-      "poc-pos-sdk": ["./src/index"]
+      "poc-pos-sdk": ["./src/index"],
+      "@/*": ["src/*"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
