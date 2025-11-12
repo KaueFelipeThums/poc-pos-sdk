@@ -54,6 +54,12 @@ export default defineConfig([
       'import/parsers': {
         '@typescript-eslint/parser': ['.ts', '.tsx'],
       },
+      'import/resolver': {
+        alias: {
+          map: [['@', './src']],
+          extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        },
+      },
     },
     rules: {
       // React Native

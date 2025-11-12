@@ -7,6 +7,9 @@
       "poc-pos-sdk": ["./src/index"],
       "@/*": ["src/*"]
     },
+    "outDir": "lib",
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "customConditions": ["react-native-strict-api"],
@@ -29,5 +32,6 @@
     "strict": true,
     "target": "ESNext",
     "verbatimModuleSyntax": true
-  }
+  },
+  "include": ["src", "example/src"]
 }
