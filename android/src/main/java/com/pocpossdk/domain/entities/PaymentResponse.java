@@ -16,6 +16,10 @@ public class PaymentResponse {
     this.data = data;
   }
 
+  public PaymentResponse(PaymentStatus status, String message) {
+    this(status, message, null);
+  }
+
   public PaymentStatus getStatus() {
     return status;
   }

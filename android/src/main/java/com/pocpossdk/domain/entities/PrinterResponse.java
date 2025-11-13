@@ -8,12 +8,16 @@ import com.pocpossdk.domain.enums.PrinterStatus;
 public class PrinterResponse {
   private PrinterStatus status;
   private String message;
-  private PrinterResponseData data;
+  private Object data;
 
-  public PrinterResponse(PrinterStatus status, String message, PrinterResponseData data) {
+  public PrinterResponse(PrinterStatus status, String message, Object data) {
     this.status = status;
     this.message = message;
     this.data = data;
+  }
+
+  public PrinterResponse(PrinterStatus status, String message) {
+    this(status, message, null);
   }
 
   public PrinterStatus getStatus() {
@@ -24,7 +28,7 @@ public class PrinterResponse {
     return message;
   }
 
-  public PrinterResponseData getData() {
+  public Object getData() {
     return data;
   }
 }
