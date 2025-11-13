@@ -1,5 +1,8 @@
-package com.zpos.domain.exceptions;
+package com.pocpossdk.domain.exceptions;
 
+/**
+ * @author Kaue Thums <kaue.thums@zucchetti.com>
+ */
 public class TefException extends Exception {
   public TefException(String message) {
     super(message);

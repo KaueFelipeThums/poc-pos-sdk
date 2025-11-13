@@ -1,5 +1,8 @@
-package com.zpos.domain.entities;
+package com.pocpossdk.domain.entities;
 
+/**
+ * @author Kaue Thums <kaue.thums@zucchetti.com>
+ */
 public class PaymentResponse {
   private final String authorizationCode;
   private final String flag;
@@ -8,8 +11,7 @@ public class PaymentResponse {
   private final String nsu;
   private final Double value;
 
-  public PaymentResponse(String authorizationCode, String flag, String proof, String cnpj, String nsu,
-      Double value) {
+  public PaymentResponse(String authorizationCode, String flag, String proof, String cnpj, String nsu,Double value) {
     this.authorizationCode = authorizationCode;
     this.flag = flag;
     this.proof = proof;
