@@ -1,4 +1,3 @@
-
 package com.pocpossdk.domain.entities;
 
 import com.pocpossdk.domain.enums.InstallmentType;
@@ -14,7 +13,8 @@ public class PaymentRequest<TExtras> {
   private PaymentType type;
   private TExtras extras;
 
-  public PaymentRequest(PaymentType type, double value, int installments, InstallmentType installmentType, TExtras extras) {
+  public PaymentRequest(PaymentType type, double value, int installments, InstallmentType installmentType,
+      TExtras extras) {
     this.installments = installments;
     this.value = value;
     this.installmentType = installmentType;

@@ -16,8 +16,8 @@ public enum PaymentType {
   BANK_SLIP,         // Boleto bancário
   BANK_DEPOSIT,      // Depósito bancário
   PIX,               // PIX
-  TRANSFER,          // Transferência bancária (TED/DOC)
-  LOYALTY,           // Programa de fidelidade/pontos
+  TRANSFER,          // Transferência bancária
+  LOYALTY,           // Programa de fidelidade
   NO_PAYMENT,        // Sem pagamento
   DEFERRED_PAYMENT,  // Posterior
   OTHER;             // Outro

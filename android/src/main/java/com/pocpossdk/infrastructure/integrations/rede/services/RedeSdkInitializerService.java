@@ -1,0 +1,93 @@
+package com.pocpossdk.infrastructure.integrations.rede.services;
+
+import android.content.Context;
+import android.util.Log;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+
+import rede.smartrede.sdk.api.RedeSdk;
+import rede.smartrede.sdk.api.IRedeSdk;
+import rede.smartrede.sdk.RedePayments;
+import rede.smartrede.commons.contract.ITerminalFunctions;
+import rede.smartrede.commons.contract.IConnectorPrinter;
+
+import com.pocpossdk.shared.utils.AppLogger;
+import com.pocpossdk.domain.exceptions.SdkInitializerException;
+
+/**
+ * @author Kaue Thums <kaue.thums@zucchetti.com>
+ */
+public class RedeSdkInitializer {
+  private static final String TAG = "RedeSdkInitializer";
+  private static IRedeSdk redeSdkInstance;
+  private static RedePayments redePayments;
+  private static ITerminalFunctions terminalFunctions;
+  private static IConnectorPrinter connectorPrinter;
+
+  private RedeSdkInitializer() {
+  }
+
+  public static synchronized void initialize(ReactApplicationContext context) throws SdkInitializerException {
+    if (redeSdkInstance != null) {
+      AppLogger.info(TAG, "RedeSdk já inicializado");
+      return;
+    }
+
+    try {
+      AppLogger.info(TAG, "Inicializando RedeSdk");
+
+      redeSdkInstance = RedeSdk.newInstance(context.getApplicationContext());
+      redePayments = redeSdkInstance.getRedePayments(context.getApplicationContext());
+      terminalFunctions = redeSdkInstance.getTerminalFunctions();
+      connectorPrinter = terminalFunctions.getConnectorPrinter();
+
+      AppLogger.info(TAG, "RedeSdk inicializado com sucesso");
+    } catch (Exception e) {
+      AppLogger.error(TAG, "Erro ao inicializar RedeSdk: " + e.getMessage());
+      throw new RedeSdkInitializerException("Falha na inicialização do RedeSdk", e);
+    }
+  }
+
+  public static IRedeSdk getRedeSdk() throws RedeSdkInitializerException {
+    if (redeSdkInstance == null) {
+      AppLogger.error(TAG, "RedeSdk não foi inicializado");
+      throw new RedeSdkInitializerException("RedeSdk não foi inicializado");
+    }
+    return redeSdkInstance;
+  }
+
+  public static RedePayments getRedePayments() throws RedeSdkInitializerException {
+    if (redePayments == null) {
+      AppLogger.error(TAG, "RedePayments não foi inicializado");
+      throw new RedeSdkInitializerException("RedePayments não foi inicializado");
+    }
+    return redePayments;
+  }
+
+  public static ITerminalFunctions getTerminalFunctions() throws RedeSdkInitializerException {
+    if (terminalFunctions == null) {
+      AppLogger.error(TAG, "TerminalFunctions não foi inicializado");
+      throw new RedeSdkInitializerException("TerminalFunctions não foi inicializado");
+    }
+    return terminalFunctions;
+  }
+
+  public static IConnectorPrinter getConnectorPrinter() throws RedeSdkInitializerException {
+    if (connectorPrinter == null) {
+      AppLogger.error(TAG, "ConnectorPrinter não foi inicializado");
+      throw new RedeSdkInitializerException("ConnectorPrinter não foi inicializado");
+    }
+    return connectorPrinter;
+  }
+
+  public static boolean isInitialized() {
+    return redeSdkInstance != null;
+  }
+
+  public static synchronized void reset() {
+    redeSdkInstance = null;
+    redePayments = null;
+    terminalFunctions = null;
+    connectorPrinter = null;
+  }
+}

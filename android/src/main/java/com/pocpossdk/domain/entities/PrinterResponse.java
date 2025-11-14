@@ -8,9 +8,9 @@ import com.pocpossdk.domain.enums.PrinterStatus;
 public class PrinterResponse {
   private PrinterStatus status;
   private String message;
-  private Object data;
+  private T data;
 
-  public PrinterResponse(PrinterStatus status, String message, Object data) {
+  public PrinterResponse(PrinterStatus status, String message, T data) {
     this.status = status;
     this.message = message;
     this.data = data;
@@ -28,7 +28,22 @@ public class PrinterResponse {
     return message;
   }
 
-  public Object getData() {
+  public T getData() {
     return data;
+  }
+
+  public WritableMap toMap() {
+    WritableMap map = Arguments.createMap();
+
+    map.putString("status", status.name());
+    map.putString("message", message != null ? message : "");
+
+    if (data != null) {
+      map.putMap("data", data.toMap());
+    } else {
+      map.putNull("data");
+    }
+
+    return map;
   }
 }
