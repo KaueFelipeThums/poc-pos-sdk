@@ -66,4 +66,23 @@ public class PaymentResponseData {
   public Receipt getReceipt() {
     return receipt;
   }
+
+  public WritableMap toMap() {
+    WritableMap map = Arguments.createMap();
+
+    map.putString("authorizationCode", authorizationCode != null ? authorizationCode : "");
+    map.putString("flag", flag != null ? flag : "");
+    map.putString("nsu", nsu != null ? nsu : "");
+    map.putDouble("amount", amount != null ? amount : 0.0);
+    map.putString("cv", cv != null ? cv : "");
+    map.putString("cnpj", cnpj != null ? cnpj : "");
+
+    if (receipt != null) {
+      map.putMap("receipt", receipt.toMap());
+    } else {
+      map.putNull("receipt");
+    }
+
+    return map;
+  }
 }

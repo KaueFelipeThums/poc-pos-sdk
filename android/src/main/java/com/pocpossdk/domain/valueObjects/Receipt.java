@@ -27,4 +27,13 @@ public class Receipt {
     public String getCustomerCopy() {
         return customerCopy;
     }
+
+    public WritableMap toMap() {
+        WritableMap map = Arguments.createMap();
+
+        map.putString("merchantCopy", merchantCopy != null ? merchantCopy : "");
+        map.putString("customerCopy", customerCopy != null ? customerCopy : "");
+
+        return map;
+    }
 }

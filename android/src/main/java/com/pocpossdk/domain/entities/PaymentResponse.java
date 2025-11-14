@@ -31,4 +31,19 @@ public class PaymentResponse {
   public PaymentResponseData getData() {
     return data;
   }
+
+  public WritableMap toMap() {
+    WritableMap map = Arguments.createMap();
+
+    map.putString("status", status.name());
+    map.putString("message", message != null ? message : "");
+
+    if (data != null) {
+      map.putMap("data", data.toMap());
+    } else {
+      map.putNull("data");
+    }
+
+    return map;
+  }
 }
