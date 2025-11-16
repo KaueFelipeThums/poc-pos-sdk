@@ -1,5 +1,8 @@
 package com.pocpossdk.domain.entities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.pocpossdk.domain.enums.InstallmentType;
 import com.pocpossdk.domain.enums.PaymentType;
 
@@ -7,14 +10,18 @@ import com.pocpossdk.domain.enums.PaymentType;
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
 public class PaymentRequest<TExtras> {
-  private int installments;
-  private double value;
-  private InstallmentType installmentType;
-  private PaymentType type;
-  private TExtras extras;
+  private @NonNull PaymentType type;
+  private @NonNull Long value;
+  private @NonNull Integer installments;
+  private @Nullable InstallmentType installmentType;
+  private @Nullable TExtras extras;
 
-  public PaymentRequest(PaymentType type, double value, int installments, InstallmentType installmentType,
-      TExtras extras) {
+  public PaymentRequest(
+      @NonNull PaymentType type,
+      @NonNull Long value,
+      @NonNull Integer installments,
+      @Nullable InstallmentType installmentType,
+      @Nullable TExtras extras) {
     this.installments = installments;
     this.value = value;
     this.installmentType = installmentType;
@@ -22,47 +29,50 @@ public class PaymentRequest<TExtras> {
     this.extras = extras;
   }
 
-  public PaymentRequest(PaymentType type, double value, int installments) {
+  public PaymentRequest(
+      @NonNull PaymentType type,
+      @NonNull Long value,
+      @NonNull Integer installments) {
     this(type, value, installments, null, null);
   }
 
-  public int getInstallments() {
+  public @Nullable Integer getInstallments() {
     return installments;
   }
 
-  public void setInstallments(int installments) {
+  public void setInstallments(@Nullable Integer installments) {
     this.installments = installments;
   }
 
-  public double getValue() {
+  public @Nullable Long getValue() {
     return value;
   }
 
-  public void setValue(double value) {
+  public void setValue(@Nullable Long value) {
     this.value = value;
   }
 
-  public InstallmentType getInstallmentType() {
+  public @Nullable InstallmentType getInstallmentType() {
     return installmentType;
   }
 
-  public void setInstallmentType(InstallmentType installmentType) {
+  public void setInstallmentType(@Nullable InstallmentType installmentType) {
     this.installmentType = installmentType;
   }
 
-  public PaymentType getType() {
+  public @Nullable PaymentType getType() {
     return type;
   }
 
-  public void setType(PaymentType type) {
+  public void setType(@Nullable PaymentType type) {
     this.type = type;
   }
 
-  public TExtras getExtras() {
+  public @Nullable TExtras getExtras() {
     return extras;
   }
 
-  public void setExtras(TExtras extras) {
+  public void setExtras(@Nullable TExtras extras) {
     this.extras = extras;
   }
 }

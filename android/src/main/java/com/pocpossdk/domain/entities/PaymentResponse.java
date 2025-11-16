@@ -1,34 +1,42 @@
 package com.pocpossdk.domain.entities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.pocpossdk.domain.enums.PaymentStatus;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
 public class PaymentResponse {
-  private PaymentStatus status;
-  private String message;
-  private PaymentResponseData data;
+  private @NonNull PaymentStatus status;
+  private @NonNull String message;
+  private @Nullable PaymentResponseData data;
 
-  public PaymentResponse(PaymentStatus status, String message, PaymentResponseData data) {
+  public PaymentResponse(
+      @NonNull PaymentStatus status,
+      @NonNull String message,
+      @Nullable PaymentResponseData data) {
     this.status = status;
     this.message = message;
     this.data = data;
   }
 
-  public PaymentResponse(PaymentStatus status, String message) {
+  public PaymentResponse(
+      @NonNull PaymentStatus status,
+      @NonNull String message) {
     this(status, message, null);
   }
 
-  public PaymentStatus getStatus() {
+  public @NonNull PaymentStatus getStatus() {
     return status;
   }
 
-  public String getMessage() {
+  public @NonNull String getMessage() {
     return message;
   }
 
-  public PaymentResponseData getData() {
+  public @Nullable PaymentResponseData getData() {
     return data;
   }
 

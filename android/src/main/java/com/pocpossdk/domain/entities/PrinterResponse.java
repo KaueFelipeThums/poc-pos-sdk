@@ -1,34 +1,42 @@
 package com.pocpossdk.domain.entities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.pocpossdk.domain.enums.PrinterStatus;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class PrinterResponse {
-  private PrinterStatus status;
-  private String message;
-  private T data;
+public class PrinterResponse<TData> {
+  private @NonNull PrinterStatus status;
+  private @NonNull String message;
+  private @Nullable TData data;
 
-  public PrinterResponse(PrinterStatus status, String message, T data) {
+  public PrinterResponse(
+      @NonNull PrinterStatus status,
+      @NonNull String message,
+      @Nullable TData data) {
     this.status = status;
     this.message = message;
     this.data = data;
   }
 
-  public PrinterResponse(PrinterStatus status, String message) {
+  public PrinterResponse(
+      @NonNull PrinterStatus status,
+      @NonNull String message) {
     this(status, message, null);
   }
 
-  public PrinterStatus getStatus() {
+  public @NonNull PrinterStatus getStatus() {
     return status;
   }
 
-  public String getMessage() {
+  public @NonNull String getMessage() {
     return message;
   }
 
-  public T getData() {
+  public @Nullable TData getData() {
     return data;
   }
 

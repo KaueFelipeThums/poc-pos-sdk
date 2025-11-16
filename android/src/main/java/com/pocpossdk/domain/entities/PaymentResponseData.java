@@ -1,27 +1,32 @@
 package com.pocpossdk.domain.entities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.pocpossdk.domain.valueObjects.Receipt;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class PaymentResponseData {
-  private final String authorizationCode;
-  private final String flag;
-  private final String nsu;
-  private final Double amount;
-  private final String cv;
-  private final String cnpj;
-  private final Receipt receipt;
+public class PaymentResponseData<TExtras> {
+  private @NonNull String authorizationCode;
+  private @NonNull String flag;
+  private @NonNull String nsu;
+  private @NonNull Double amount;
+  private @NonNull String cv;
+  private @NonNull String cnpj;
+  private @Nullable Receipt receipt;
+  private @Nullable TExtras extras;
 
   public PaymentResponseData(
-      String authorizationCode,
-      String flag,
-      String nsu,
-      Double amount,
-      String cv,
-      String cnpj,
-      Receipt receipt) {
+      @NonNull String authorizationCode,
+      @NonNull String flag,
+      @NonNull String nsu,
+      @NonNull Double amount,
+      @NonNull String cv,
+      @NonNull String cnpj,
+      @Nullable Receipt receipt,
+      @Nullable TExtras extras) {
     this.authorizationCode = authorizationCode;
     this.flag = flag;
     this.cv = cv;
@@ -29,42 +34,47 @@ public class PaymentResponseData {
     this.cnpj = cnpj;
     this.amount = amount;
     this.receipt = receipt;
+    this.extras = extras;
   }
 
   public PaymentResponseData(
-      String authorizationCode,
-      String flag,
-      String nsu,
-      Double amount) {
-    this(authorizationCode, flag, nsu, amount, null, null, null);
+      @NonNull String authorizationCode,
+      @NonNull String flag,
+      @NonNull String nsu,
+      @NonNull Double amount) {
+    this(authorizationCode, flag, nsu, amount, "", "", null, null);
   }
 
-  public String getAuthorizationCode() {
+  public @NonNull String getAuthorizationCode() {
     return authorizationCode;
   }
 
-  public String getFlag() {
+  public @NonNull String getFlag() {
     return flag;
   }
 
-  public String getCv() {
+  public @NonNull String getCv() {
     return cv;
   }
 
-  public String getNsu() {
+  public @NonNull String getNsu() {
     return nsu;
   }
 
-  public String getCnpj() {
+  public @NonNull String getCnpj() {
     return cnpj;
   }
 
-  public Double getAmount() {
+  public @NonNull Double getAmount() {
     return amount;
   }
 
-  public Receipt getReceipt() {
+  public @Nullable Receipt getReceipt() {
     return receipt;
+  }
+
+  public @Nullable TExtras getExtras() {
+    return extras;
   }
 
   public WritableMap toMap() {
@@ -73,9 +83,15 @@ public class PaymentResponseData {
     map.putString("authorizationCode", authorizationCode != null ? authorizationCode : "");
     map.putString("flag", flag != null ? flag : "");
     map.putString("nsu", nsu != null ? nsu : "");
-    map.putDouble("amount", amount != null ? amount : 0.0);
+    map.putDouble("amount", amount != null ? amount : 0);
     map.putString("cv", cv != null ? cv : "");
     map.putString("cnpj", cnpj != null ? cnpj : "");
+
+    if (extras != null) {
+      map.putMap("extras", extras.toMap());
+    } else {
+      map.putNull("extras");
+    }
 
     if (receipt != null) {
       map.putMap("receipt", receipt.toMap());

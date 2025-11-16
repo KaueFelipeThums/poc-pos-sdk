@@ -6,7 +6,7 @@ import android.content.Intent;
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
 public interface IActivityResultHandler {
-  boolean handlesRequestCode(int requestCode);
+  boolean checkRequestCode(int requestCode);
 
   void handleActivityResult(int resultCode, Intent data);
 }
