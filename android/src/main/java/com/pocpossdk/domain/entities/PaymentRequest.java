@@ -13,14 +13,14 @@ public class PaymentRequest<TExtras> {
   private @NonNull PaymentType type;
   private @NonNull Long value;
   private @NonNull Integer installments;
-  private @Nullable InstallmentType installmentType;
+  private @NonNull InstallmentType installmentType;
   private @Nullable TExtras extras;
 
   public PaymentRequest(
       @NonNull PaymentType type,
       @NonNull Long value,
       @NonNull Integer installments,
-      @Nullable InstallmentType installmentType,
+      @NonNull InstallmentType installmentType,
       @Nullable TExtras extras) {
     this.installments = installments;
     this.value = value;
@@ -32,15 +32,16 @@ public class PaymentRequest<TExtras> {
   public PaymentRequest(
       @NonNull PaymentType type,
       @NonNull Long value,
-      @NonNull Integer installments) {
-    this(type, value, installments, null, null);
+      @NonNull Integer installments,
+      @NonNull InstallmentType installmentType) {
+    this(type, value, installments, installmentType, null);
   }
 
-  public @Nullable Integer getInstallments() {
+  public @NonNull Integer getInstallments() {
     return installments;
   }
 
-  public void setInstallments(@Nullable Integer installments) {
+  public void setInstallments(@NonNull Integer installments) {
     this.installments = installments;
   }
 

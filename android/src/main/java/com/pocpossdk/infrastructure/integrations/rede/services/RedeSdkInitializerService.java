@@ -44,38 +44,38 @@ public class RedeSdkInitializer {
       AppLogger.info(TAG, "RedeSdk inicializado com sucesso");
     } catch (Exception e) {
       AppLogger.error(TAG, "Erro ao inicializar RedeSdk: " + e.getMessage());
-      throw new RedeSdkInitializerException("Falha na inicialização do RedeSdk", e);
+      throw new SdkInitializerException("Falha na inicialização do RedeSdk", e);
     }
   }
 
-  public static IRedeSdk getRedeSdk() throws RedeSdkInitializerException {
+  public static IRedeSdk getRedeSdk() throws SdkInitializerException {
     if (redeSdkInstance == null) {
       AppLogger.error(TAG, "RedeSdk não foi inicializado");
-      throw new RedeSdkInitializerException("RedeSdk não foi inicializado");
+      throw new SdkInitializerException("RedeSdk não foi inicializado");
     }
     return redeSdkInstance;
   }
 
-  public static RedePayments getRedePayments() throws RedeSdkInitializerException {
+  public static RedePayments getRedePayments() throws SdkInitializerException {
     if (redePayments == null) {
       AppLogger.error(TAG, "RedePayments não foi inicializado");
-      throw new RedeSdkInitializerException("RedePayments não foi inicializado");
+      throw new SdkInitializerException("RedePayments não foi inicializado");
     }
     return redePayments;
   }
 
-  public static ITerminalFunctions getTerminalFunctions() throws RedeSdkInitializerException {
+  public static ITerminalFunctions getTerminalFunctions() throws SdkInitializerException {
     if (terminalFunctions == null) {
       AppLogger.error(TAG, "TerminalFunctions não foi inicializado");
-      throw new RedeSdkInitializerException("TerminalFunctions não foi inicializado");
+      throw new SdkInitializerException("TerminalFunctions não foi inicializado");
     }
     return terminalFunctions;
   }
 
-  public static IConnectorPrinter getConnectorPrinter() throws RedeSdkInitializerException {
+  public static IConnectorPrinter getConnectorPrinter() throws SdkInitializerException {
     if (connectorPrinter == null) {
       AppLogger.error(TAG, "ConnectorPrinter não foi inicializado");
-      throw new RedeSdkInitializerException("ConnectorPrinter não foi inicializado");
+      throw new SdkInitializerException("ConnectorPrinter não foi inicializado");
     }
     return connectorPrinter;
   }

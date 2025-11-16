@@ -7,36 +7,39 @@ import com.facebook.react.bridge.ReadableMap;
 import com.pocpossdk.domain.entities.PaymentRequest;
 import com.pocpossdk.domain.enums.PaymentType;
 import com.pocpossdk.domain.enums.InstallmentType;
+import com.pocpossdk.domain.exceptions.ValidationException;
 import com.pocpossdk.infrastructure.integrations.rede.domain.entities.RedePaymentExtras;
+import com.pocpossdk.shared.utils.InputValidator;
+import com.pocpossdk.shared.utils.PaymentParamsExtractor;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
 public class RedePaymentRequestMapper {
-  public static PaymentRequest<RedePaymentExtras> map(@NonNull ReadableMap map) {
+  public static PaymentRequest<RedePaymentExtras> map(@NonNull ReadableMap map) throws ValidationException {
 
-
-    String typeStr = map.hasKey("type") ? map.getString("type") : "DEBIT";
-    Long value = map.hasKey("value") ? (long) map.getDouble("value") : 0L;
-    Integer installments = map.hasKey("installments") ? map.getInt("installments") : 0;
-
-    PaymentType type = PaymentType.valueOf(typeStr.toUpperCase());
-
-    InstallmentType installmentType = null;
-    if (map.hasKey("installmentType") && map.getString("installmentType") != null) {
-      installmentType = InstallmentType.valueOf(map.getString("installmentType").toUpperCase());
+    if(!InputValidator.isNonNull(map)) {
+      throw new ValidationException("Os dados da transação não foram informados");
     }
 
-    RedePaymentExtras extras = null;
-    if (map.hasKey("extras") && map.getMap("extras") != null) {
-      ReadableMap extrasMap = map.getMap("extras");
-      String packageName = extrasMap.hasKey("packageName") ?
-          extrasMap.getString("packageName") : "com.userede.rede";
-      extras = new RedePaymentExtras(packageName);
-    } else {
-      extras = new RedePaymentExtras("com.userede.rede");
+    PaymentType type = PaymentParamsExtractor.extractPaymentType(map);
+    Long value = PaymentParamsExtractor.extractValue(map);
+    Integer installments = PaymentParamsExtractor.extractInstallments(map);
+    InstallmentType installmentType = PaymentParamsExtractor.extractInstallmentType(map);
+
+    if(!map.hasKey("extras") || !InputValidator.isNonNull(map.getMap("extras"))) {
+      throw new ValidationException("Configurações adicionais são obrigatórias");
     }
 
-    return new PaymentRequest<>(type, value, installments, installmentType, extras);
+    ReadableMap extrasMap = map.getMap("extras");
+
+    if(!extrasMap.hasKey("redePackageName") || !InputValidator.isNonEmpty(extrasMap.getString("redePackageName"))) {
+      throw new ValidationException("O nome do pacote da Rede é obrigatório");
+    }
+
+    String packageName = extrasMap.getString("redePackageName");
+    RedePaymentExtras extras = new RedePaymentExtras(packageName);
+
+    return new PaymentRequest<RedePaymentExtras>(type, value, installments, installmentType, extras);
   }
 }

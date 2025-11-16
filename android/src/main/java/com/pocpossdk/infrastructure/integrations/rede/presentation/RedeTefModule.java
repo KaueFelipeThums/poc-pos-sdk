@@ -24,6 +24,7 @@ import com.pocpossdk.domain.contracts.ITefService;
 import com.pocpossdk.domain.entities.PaymentResponse;
 import com.pocpossdk.domain.entities.PaymentRequest;
 import com.pocpossdk.domain.enums.PaymentStatus;
+import com.pocpossdk.domain.exceptions.ValidationException;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeTefService;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
@@ -71,6 +72,7 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
             promise.resolve(result.toMap());
           })
           .exceptionally(e -> {
+            AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
             PaymentResponse errorResponse = new PaymentResponse(
                 PaymentStatus.UNKNOWN_ERROR,
                 PaymentStatus.UNKNOWN_ERROR.getDescription());
@@ -78,11 +80,17 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
             promise.resolve(errorResponse.toMap());
             return null;
           });
-    } catch (Exception e) {
-      AppLogger.error(TAG, "Erro ao processar pagamento: " + e.getMessage());
+    } catch (ValidationException ve) {
+      AppLogger.error(TAG, PaymentStatus.INVALID_REQUEST.getDescription() + ": " + ve.getMessage());
       PaymentResponse errorResponse = new PaymentResponse(
-          PaymentStatus.UNKNOWN_ERROR,
-          "Erro ao processar pagamento: " + e.getMessage());
+          PaymentStatus.INVALID_REQUEST,
+          PaymentStatus.INVALID_REQUEST.getDescription() + ": " + ve.getMessage());
+      promise.resolve(errorResponse.toMap());
+    } catch (Exception e) {
+      AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
+      PaymentResponse errorResponse = new PaymentResponse(
+              PaymentStatus.UNKNOWN_ERROR,
+              PaymentStatus.UNKNOWN_ERROR.getDescription());
       promise.resolve(errorResponse.toMap());
     }
   }
