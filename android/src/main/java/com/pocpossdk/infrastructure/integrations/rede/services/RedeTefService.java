@@ -105,12 +105,7 @@ public class RedeTefService implements ITefService, IActivityResultHandler {
       }
 
       Payment payment = RedePayments.getPaymentFromIntent(data);
-      if (payment == null) {
-        throw new TefException("Transação inválida");
-      }
-
-      Receipt receipt = payment.getReceipt();
-      PaymentResponse paymentResponse = RedePaymentResponseMapper.map(receipt);
+      PaymentResponse paymentResponse = RedePaymentResponseMapper.map(payment);
 
       AppLogger.info(TAG, "Processamento do pagamento concluído");
       future.complete(paymentResponse);
