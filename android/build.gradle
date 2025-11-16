@@ -85,11 +85,17 @@ android {
   }
 
   sourceSets {
-    main {
-      java.srcDirs += [
-        "generated/java",
-        "generated/jni"
-      ]
+     main {
+        java {
+          srcDirs += [
+            "generated/java",
+            "generated/jni"
+          ]
+
+          if (administrator != CardAdministratorEnum.REDE) {
+            exclude 'com/pocpossdk/infrastructure/integrations/rede/**'
+          }
+        }
     }
   }
 }
