@@ -72,9 +72,9 @@ public class RedePrinterService implements IPrinterService {
       printer.printBitmapWithAttributes(bitmap, attrs);
     } catch (PrinterException e) {
       AppLogger.error(TAG, PrinterStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
-      pending.complete(new PrinterResponse<>(
+      future.complete(new PrinterResponse<>(
           PrinterStatus.UNKNOWN_ERROR,
-          PrinterStatus.UNKNOWN_ERROR.getDescription()) + " :" + e.getMessage());
+          PrinterStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage()));
     } catch (Exception e) {
       AppLogger.error(TAG, PrinterStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
       future.complete(new PrinterResponse<>(

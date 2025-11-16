@@ -3,6 +3,9 @@ package com.pocpossdk.domain.entities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+
 import com.pocpossdk.domain.enums.PaymentStatus;
 
 /**
@@ -32,12 +35,24 @@ public class PaymentResponse {
     return status;
   }
 
+  public void setStatus(@NonNull PaymentStatus status) {
+    this.status = status;
+  }
+
   public @NonNull String getMessage() {
     return message;
   }
 
+  public void setMessage(@NonNull String message) {
+    this.message = message;
+  }
+
   public @Nullable PaymentResponseData getData() {
     return data;
+  }
+
+  public void setData(@Nullable PaymentResponseData data) {
+    this.data = data;
   }
 
   public WritableMap toMap() {

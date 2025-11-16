@@ -3,6 +3,9 @@ package com.pocpossdk.domain.entities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+
 import com.pocpossdk.domain.valueObjects.Receipt;
 
 /**
@@ -12,7 +15,7 @@ public class PaymentResponseData<TExtras> {
   private @NonNull String authorizationCode;
   private @NonNull String flag;
   private @NonNull String nsu;
-  private @NonNull Double amount;
+  private @NonNull Long amount;
   private @NonNull String cv;
   private @NonNull String cnpj;
   private @Nullable Receipt receipt;
@@ -22,7 +25,7 @@ public class PaymentResponseData<TExtras> {
       @NonNull String authorizationCode,
       @NonNull String flag,
       @NonNull String nsu,
-      @NonNull Double amount,
+      @NonNull Long amount,
       @NonNull String cv,
       @NonNull String cnpj,
       @Nullable Receipt receipt,
@@ -65,7 +68,7 @@ public class PaymentResponseData<TExtras> {
     return cnpj;
   }
 
-  public @NonNull Double getAmount() {
+  public @NonNull Long getAmount() {
     return amount;
   }
 
@@ -83,7 +86,7 @@ public class PaymentResponseData<TExtras> {
     map.putString("authorizationCode", authorizationCode != null ? authorizationCode : "");
     map.putString("flag", flag != null ? flag : "");
     map.putString("nsu", nsu != null ? nsu : "");
-    map.putDouble("amount", amount != null ? amount : 0);
+    map.putLong("amount", amount != null ? amount : 0);
     map.putString("cv", cv != null ? cv : "");
     map.putString("cnpj", cnpj != null ? cnpj : "");
 

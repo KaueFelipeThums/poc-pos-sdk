@@ -10,10 +10,14 @@ public class RedePaymentExtras {
   private @NonNull String packageName;
 
   public RedePaymentExtras(@NonNull String packageName) {
-    this(packageName, null);
+    this.packageName = packageName;
   }
 
   public @NonNull String getPackageName() {
     return packageName;
+  }
+
+  public void setPackageName(@NonNull String packageName) {
+    this.packageName = packageName;
   }
 }

@@ -3,6 +3,9 @@ package com.pocpossdk.domain.entities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+
 import com.pocpossdk.domain.enums.PrinterStatus;
 
 /**
@@ -32,12 +35,24 @@ public class PrinterResponse<TData> {
     return status;
   }
 
+  public void setStatus(@NonNull PrinterStatus status) {
+    this.status = status;
+  }
+
   public @NonNull String getMessage() {
     return message;
   }
 
+  public void setMessage(@NonNull String message) {
+    this.message = message;
+  }
+
   public @Nullable TData getData() {
     return data;
+  }
+
+  public void setData(@Nullable TData data) {
+    this.data = data;
   }
 
   public WritableMap toMap() {
