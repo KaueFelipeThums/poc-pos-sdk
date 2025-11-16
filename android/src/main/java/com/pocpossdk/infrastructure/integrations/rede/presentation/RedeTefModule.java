@@ -24,6 +24,7 @@ import com.pocpossdk.domain.contracts.ITefService;
 import com.pocpossdk.domain.entities.PaymentResponse;
 import com.pocpossdk.domain.entities.PaymentRequest;
 import com.pocpossdk.domain.enums.PaymentStatus;
+import com.pocpossdk.domain.enums.TefCapabilities;
 import com.pocpossdk.domain.exceptions.ValidationException;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeTefService;
@@ -105,7 +106,7 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getCapabilities(Promise promise) {
     WritableArray capabilities = Arguments.createArray();
-    capabilities.pushString("payment");
+    capabilities.pushString(TefCapabilities.PAYMENT.name());
     promise.resolve(capabilities);
   }
 }

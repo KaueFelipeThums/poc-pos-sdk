@@ -15,14 +15,36 @@ buildscript {
   }
 }
 
-
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "com.facebook.react"
 
-def getExtOrIntegerDefault(name) {
-  return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["PocPosSdk_" + name]).toInteger()
+ext.getExtOrDefault = { name, defaultValue = null ->
+  if (rootProject.ext.has(name)) return rootProject.ext.get(name)
+  if (project.hasProperty("PocPosSdk_$name")) return project.properties["PocPosSdk_$name"]
+  return defaultValue
 }
+
+ext {
+  CardAdministratorEnum = [
+    VEROUP: 'VEROUP',
+    STONE: 'STONE',
+    PAGBANK: 'PAGBANK',
+    REDE: 'REDE',
+    CIELO: 'CIELO',
+    FISERV: 'FISERV',
+    SIPAG: 'SIPAG',
+    MOBILE: 'MOBILE',
+  ]
+
+  CardModelEnum = [
+    N960K: 'N960K',
+    L400: 'L400',
+  ]
+}
+
+def administrator = getExtOrDefault("ADMINISTRATOR", "")
+def model = getExtOrDefault("MODEL", "")
 
 android {
   namespace "com.pocpossdk"
@@ -30,6 +52,9 @@ android {
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
 
   defaultConfig {
+    buildConfigField "String", "ADMINISTRATOR", "\"${administrator}\""
+    buildConfigField "String", "MODEL", "\"${model}\""
+
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
   }
@@ -73,4 +98,25 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  switch (administrator) {
+    case CardAdministratorEnum.REDE:
+      implementation 'com.google.code.gson:gson:2.8.5'
+      implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
+      implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.0'
+
+      implementation 'androidx.appcompat:appcompat:1.1.0'
+      implementation 'androidx.activity:activity-ktx:1.2.0'
+      implementation 'androidx.fragment:fragment-ktx:1.3.0'
+
+      switch (model) {
+        case CardModelEnum.N960K:
+          implementation fileTree(dir: 'libs/rede', include: ['sdk-rede-n960-4.3.14.release.aar'])
+          break
+        case CardModelEnum.L400:
+          implementation fileTree(dir: 'libs/rede', include: ['sdk-rede-l400-4.3.9.debug.aar'])
+          break
+      }
+      break
+  }
 }

@@ -31,7 +31,7 @@ import com.pocpossdk.infrastructure.integrations.rede.mappers.RedePaymentRespons
 public class RedeTefService implements ITefService, IActivityResultHandler {
   private static final String TAG = "RedeTefService";
   private final ReactApplicationContext context;
-  private static final Integer REQUEST_CODE = 1001;
+  private static final Integer PAYMENT_REQUEST_CODE = 1001;
   private CompletableFuture<PaymentResponse> future;
 
   public RedeTefService(ReactApplicationContext context) {
@@ -39,11 +39,24 @@ public class RedeTefService implements ITefService, IActivityResultHandler {
   }
 
   public CompletableFuture<PaymentResponse> payment(PaymentRequest paymentRequest) {
+    if (future != null && !future.isDone()) {
+        CompletableFuture<PaymentResponse> error = new CompletableFuture<>();
+        error.complete(new PaymentResponse(
+            PaymentStatus.INVALID_REQUEST,
+            PaymentStatus.INVALID_REQUEST.getDescription() + ": Já existe uma transação em andamento"
+        ));
+        return error;
+    }
+
     AppLogger.info(TAG, "Iniciando pagamento");
     future = new CompletableFuture<PaymentResponse>();
 
     try {
       Activity activity = context.getCurrentActivity();
+
+      if (activity == null) {
+        throw new TefException("Não foi possível iniciar o pagamento. Tente novamente.");
+      }
 
       if (!RedeSdkInitializer.isInitialized()) {
         throw new TefException("SDK não inicializado");
@@ -76,18 +89,36 @@ public class RedeTefService implements ITefService, IActivityResultHandler {
       paymentIntentBuilder.setInstallments(installments);
 
       Intent paymentIntent = paymentIntentBuilder.build();
-      activity.startActivityForResult(paymentIntent, REQUEST_CODE);
+      activity.startActivityForResult(paymentIntent, PAYMENT_REQUEST_CODE);
     } catch (TefException e) {
       AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
-      future.complete(new PaymentResponse(
+      resolveFuture(new PaymentResponse(
           PaymentStatus.UNKNOWN_ERROR,
           PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage()));
     } catch (Exception e) {
       AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
-      future.complete(unknownErrorResponse());
+      resolveFuture(unknownErrorResponse());
     }
 
     return future;
+  }
+
+  private void handlePaymentResponse(Intent data) {
+    try {
+      Payment payment = RedePayments.getPaymentFromIntent(data);
+      PaymentResponse paymentResponse = RedePaymentResponseMapper.map(payment);
+
+      AppLogger.info(TAG, "Processamento do pagamento concluído");
+      resolveFuture(paymentResponse);
+    } catch (TefException e) {
+      AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
+      resolveFuture(new PaymentResponse(
+          PaymentStatus.UNKNOWN_ERROR,
+          PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage()));
+    } catch (Exception e) {
+      AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
+      resolveFuture(unknownErrorResponse());
+    }
   }
 
   public void handleActivityResult(int requestCode, int resultCode, Intent data) {
@@ -95,34 +126,34 @@ public class RedeTefService implements ITefService, IActivityResultHandler {
       return;
     }
 
-    try {
-      if (requestCode != REQUEST_CODE) {
-        throw new TefException("Código de requisição inválido");
-      }
-
-      if (resultCode == Activity.RESULT_CANCELED || data == null) {
-        throw new TefException("Transação cancelada");
-      }
-
-      Payment payment = RedePayments.getPaymentFromIntent(data);
-      PaymentResponse paymentResponse = RedePaymentResponseMapper.map(payment);
-
-      AppLogger.info(TAG, "Processamento do pagamento concluído");
-      future.complete(paymentResponse);
-    } catch (TefException e) {
-      AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
-      future.complete(new PaymentResponse(
-          PaymentStatus.UNKNOWN_ERROR,
-          PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage()));
-    } catch (Exception e) {
-      AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + " :" + e.getMessage());
-      future.complete(unknownErrorResponse());
+    if (resultCode == Activity.RESULT_CANCELED || data == null) {
+      resolveFuture(new PaymentResponse(
+        PaymentStatus.CANCELLED,
+        PaymentStatus.CANCELLED.getDescription()
+      ));
+      return;
     }
+
+    if (requestCode == PAYMENT_REQUEST_CODE) {
+      handlePaymentResponse(data);
+      return;
+    }
+
+    resolveFuture(new PaymentResponse(
+        PaymentStatus.UNKNOWN_ERROR,
+        PaymentStatus.UNKNOWN_ERROR.getDescription()));
   }
 
   private PaymentResponse unknownErrorResponse() {
     return new PaymentResponse(
         PaymentStatus.UNKNOWN_ERROR,
         PaymentStatus.UNKNOWN_ERROR.getDescription());
+  }
+
+  private void resolveFuture(PaymentResponse response) {
+    if (future != null && !future.isDone()) {
+        future.complete(response);
+    }
+    future = null;
   }
 }

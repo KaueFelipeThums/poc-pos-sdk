@@ -9,23 +9,23 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
-import com.pocpossdk.domain.contracts.IPrinterService;
+import com.pocpossdk.domain.contracts.IScannerService;
 import com.pocpossdk.shared.utils.AppLogger;
-import com.pocpossdk.infrastructure.integrations.rede.services.RedePrinterService;
+import com.pocpossdk.infrastructure.integrations.rede.services.RedeScannerService;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
 import com.pocpossdk.domain.exceptions.SdkInitializerException;
-import com.pocpossdk.domain.entities.PrinterResponse;
-import com.pocpossdk.domain.enums.PrinterStatus;
-import com.pocpossdk.domain.enums.PrinterCapabilities;
+import com.pocpossdk.domain.entities.ScannerResponse;
+import com.pocpossdk.domain.enums.ScannerStatus;
+import com.pocpossdk.domain.enums.ScannerCapabilities;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class RedePrinterModule extends ReactContextBaseJavaModule {
-  private final String TAG = "RedePrinterModule";
-  private final IPrinterService printerService;
+public class RedeScannerModule extends ReactContextBaseJavaModule {
+  private final String TAG = "RedeScannerModule";
+  private final IScannerService scannerService;
 
-  public RedePrinterModule(ReactApplicationContext reactContext) {
+  public RedeScannerModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
     try {
@@ -38,25 +38,25 @@ public class RedePrinterModule extends ReactContextBaseJavaModule {
       AppLogger.error(TAG, "Erro inesperado na inicialização: " + e.getMessage());
     }
 
-    this.printerService = new RedePrinterService();
+    this.scannerService = new RedeScannerService();
   }
 
   @NonNull
   @Override
   public String getName() {
-    return "RedePrinterModule";
+    return "RedeScannerModule";
   }
 
   @ReactMethod
-  public void printImageBase64(String base64Image, Promise promise) {
-    printerService.printImageBase64(base64Image)
+  public void scan(Promise promise) {
+    scannerService.printImageBase64()
         .thenAccept(result -> {
           promise.resolve(result.toMap());
         })
         .exceptionally(e -> {
-          PrinterResponse<?> errorResponse = new PrinterResponse<>(
-              PrinterStatus.UNKNOWN_ERROR,
-              PrinterStatus.UNKNOWN_ERROR.getDescription());
+          ScannerResponse errorResponse = new ScannerResponse(
+              ScannerStatus.UNKNOWN_ERROR,
+              ScannerStatus.UNKNOWN_ERROR.getDescription());
 
           promise.resolve(errorResponse.toMap());
           return null;
@@ -66,7 +66,7 @@ public class RedePrinterModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void getCapabilities(Promise promise) {
     WritableArray capabilities = Arguments.createArray();
-    capabilities.pushString(PrinterCapabilities.PRINT_BASE64_IMAGE.name());
+    capabilities.pushString(ScannerCapabilities.SCAN.name());
     promise.resolve(capabilities);
   }
 }
