@@ -5,21 +5,21 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
-
+import com.pocpossdk.domain.contracts.IMappable;
 import com.pocpossdk.domain.enums.PaymentStatus;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class PaymentResponse {
+public class PaymentResponse<TExtras extends IMappable> {
   private @NonNull PaymentStatus status;
   private @NonNull String message;
-  private @Nullable PaymentResponseData data;
+  private @Nullable PaymentResponseData<TExtras> data;
 
   public PaymentResponse(
       @NonNull PaymentStatus status,
       @NonNull String message,
-      @Nullable PaymentResponseData data) {
+      @Nullable PaymentResponseData<TExtras> data) {
     this.status = status;
     this.message = message;
     this.data = data;
@@ -47,11 +47,11 @@ public class PaymentResponse {
     this.message = message;
   }
 
-  public @Nullable PaymentResponseData getData() {
+  public @Nullable PaymentResponseData<TExtras> getData() {
     return data;
   }
 
-  public void setData(@Nullable PaymentResponseData data) {
+  public void setData(@Nullable PaymentResponseData<TExtras> data) {
     this.data = data;
   }
 

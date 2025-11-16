@@ -19,4 +19,12 @@ public final class ValueUtils {
     public static Double safeDouble(Double value) {
         return value == null ? 0.0 : value;
     }
+
+    public static Long doubleToLongCents(Double value) {
+        return value == null ? 0L : Math.round(value * 100);
+    }
+
+    public static Double longCentsToDouble(Long value) {
+        return value == null ? 0.0 : value / 100.0;
+    }
 }

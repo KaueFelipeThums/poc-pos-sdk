@@ -1,5 +1,8 @@
 package com.pocpossdk.domain.valueObjects;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */

@@ -13,7 +13,7 @@ import rede.smartrede.commons.exception.InvalidSdkStateException;
 import com.pocpossdk.domain.contracts.IScannerService;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.domain.exceptions.ScannerException;
-import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
+import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 import com.pocpossdk.domain.entities.ScannerResponse;
 import com.pocpossdk.domain.entities.ScannerResponseData;
 import com.pocpossdk.domain.enums.ScannerStatus;
@@ -36,7 +36,7 @@ public class RedeScannerService implements IScannerService {
     CompletableFuture<ScannerResponse> future = new CompletableFuture<>();
 
     try {
-      if (!RedeSdkInitializer.isInitialized()) {
+      if (!RedeSdkInitializerService.isInitialized()) {
         throw new ScannerException("SDK não inicializado");
       }
 
@@ -45,7 +45,7 @@ public class RedeScannerService implements IScannerService {
         throw new ScannerException("Não foi possível iniciar a leitura. Tente novamente.");
       }
 
-      ITerminalFunctions terminalFunctions = RedeSdkInitializer.getTerminalFunctions();
+      ITerminalFunctions terminalFunctions = RedeSdkInitializerService.getTerminalFunctions();
 
       terminalFunctions.openCamera(activity, new ICameraCallback() {
         @Override

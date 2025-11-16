@@ -5,13 +5,13 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
-
+import com.pocpossdk.domain.contracts.IMappable;
 import com.pocpossdk.domain.valueObjects.Receipt;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class PaymentResponseData<TExtras> {
+public class PaymentResponseData<TExtras extends IMappable> {
   private @NonNull String authorizationCode;
   private @NonNull String flag;
   private @NonNull String nsu;
@@ -44,7 +44,7 @@ public class PaymentResponseData<TExtras> {
       @NonNull String authorizationCode,
       @NonNull String flag,
       @NonNull String nsu,
-      @NonNull Double amount) {
+      @NonNull Long amount) {
     this(authorizationCode, flag, nsu, amount, "", "", null, null);
   }
 

@@ -7,11 +7,12 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
 
 import com.pocpossdk.domain.enums.PrinterStatus;
+import com.pocpossdk.domain.contracts.IMappable;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class PrinterResponse<TData> {
+public class PrinterResponse<TData extends IMappable> {
   private @NonNull PrinterStatus status;
   private @NonNull String message;
   private @Nullable TData data;

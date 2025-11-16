@@ -12,7 +12,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.pocpossdk.domain.contracts.IPrinterService;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedePrinterService;
-import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
+import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 import com.pocpossdk.domain.exceptions.SdkInitializerException;
 import com.pocpossdk.domain.entities.PrinterResponse;
 import com.pocpossdk.domain.enums.PrinterStatus;
@@ -29,8 +29,8 @@ public class RedePrinterModule extends ReactContextBaseJavaModule {
     super(reactContext);
 
     try {
-      if (!RedeSdkInitializer.isInitialized()) {
-        RedeSdkInitializer.initialize(reactContext);
+      if (!RedeSdkInitializerService.isInitialized()) {
+        RedeSdkInitializerService.initialize(reactContext);
       }
     } catch (SdkInitializerException e) {
       AppLogger.error(TAG, "Falha na inicialização do SDK: " + e.getMessage());

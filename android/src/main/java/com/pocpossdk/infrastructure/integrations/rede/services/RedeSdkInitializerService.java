@@ -17,14 +17,14 @@ import com.pocpossdk.domain.exceptions.SdkInitializerException;
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class RedeSdkInitializer {
-  private static final String TAG = "RedeSdkInitializer";
+public class RedeSdkInitializerService {
+  private static final String TAG = "RedeSdkInitializerService";
   private static IRedeSdk redeSdkInstance;
   private static RedePayments redePayments;
   private static ITerminalFunctions terminalFunctions;
   private static IConnectorPrinter connectorPrinter;
 
-  private RedeSdkInitializer() {
+  private RedeSdkInitializerService() {
   }
 
   public static synchronized void initialize(ReactApplicationContext context) throws SdkInitializerException {

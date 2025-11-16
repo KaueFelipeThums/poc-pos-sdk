@@ -3,10 +3,14 @@ package com.pocpossdk.infrastructure.integrations.rede.domain.entities;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.WritableMap;
+import com.pocpossdk.domain.contracts.IMappable;
+
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class RedePaymentExtras {
+public class RedePaymentExtras implements IMappable {
   private @NonNull String packageName;
 
   public RedePaymentExtras(@NonNull String packageName) {
@@ -19,5 +23,12 @@ public class RedePaymentExtras {
 
   public void setPackageName(@NonNull String packageName) {
     this.packageName = packageName;
+  }
+
+  @Override
+  public WritableMap toMap() {
+    WritableMap map = Arguments.createMap();
+    map.putString("packageName", packageName);
+    return map;
   }
 }

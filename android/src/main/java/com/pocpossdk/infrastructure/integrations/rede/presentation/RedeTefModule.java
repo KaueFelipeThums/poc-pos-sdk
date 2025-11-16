@@ -20,7 +20,7 @@ import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.BaseActivityEventListener;
 
-import com.pocpossdk.domain.contracts.ITefService;
+import com.pocpossdk.domain.contracts.ITefServiceWithActivityHandler;
 import com.pocpossdk.domain.entities.PaymentResponse;
 import com.pocpossdk.domain.entities.PaymentRequest;
 import com.pocpossdk.domain.enums.PaymentStatus;
@@ -28,7 +28,7 @@ import com.pocpossdk.domain.enums.TefCapabilities;
 import com.pocpossdk.domain.exceptions.ValidationException;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeTefService;
-import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
+import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 import com.pocpossdk.infrastructure.integrations.rede.domain.entities.RedePaymentExtras;
 import com.pocpossdk.infrastructure.integrations.rede.mappers.RedePaymentRequestMapper;
 import com.pocpossdk.domain.exceptions.SdkInitializerException;
@@ -38,14 +38,14 @@ import com.pocpossdk.domain.exceptions.SdkInitializerException;
  */
 public class RedeTefModule extends ReactContextBaseJavaModule {
   private final String TAG = "RedeTefModule";
-  private final ITefService tefService;
+  private final ITefServiceWithActivityHandler tefService;
 
   public RedeTefModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
     try {
-      if (!RedeSdkInitializer.isInitialized()) {
-        RedeSdkInitializer.initialize(reactContext);
+      if (!RedeSdkInitializerService.isInitialized()) {
+        RedeSdkInitializerService.initialize(reactContext);
       }
     } catch (SdkInitializerException e) {
       AppLogger.error(TAG, "Falha na inicialização do SDK: " + e.getMessage());
@@ -74,7 +74,7 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
           })
           .exceptionally(e -> {
             AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
-            PaymentResponse errorResponse = new PaymentResponse(
+            PaymentResponse errorResponse = new PaymentResponse<>(
                 PaymentStatus.UNKNOWN_ERROR,
                 PaymentStatus.UNKNOWN_ERROR.getDescription());
 
@@ -83,13 +83,13 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
           });
     } catch (ValidationException ve) {
       AppLogger.error(TAG, PaymentStatus.INVALID_REQUEST.getDescription() + ": " + ve.getMessage());
-      PaymentResponse errorResponse = new PaymentResponse(
+      PaymentResponse errorResponse = new PaymentResponse<>(
           PaymentStatus.INVALID_REQUEST,
           PaymentStatus.INVALID_REQUEST.getDescription() + ": " + ve.getMessage());
       promise.resolve(errorResponse.toMap());
     } catch (Exception e) {
       AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
-      PaymentResponse errorResponse = new PaymentResponse(
+      PaymentResponse errorResponse = new PaymentResponse<>(
               PaymentStatus.UNKNOWN_ERROR,
               PaymentStatus.UNKNOWN_ERROR.getDescription());
       promise.resolve(errorResponse.toMap());

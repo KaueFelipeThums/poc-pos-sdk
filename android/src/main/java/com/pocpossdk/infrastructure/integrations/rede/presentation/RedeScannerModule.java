@@ -12,7 +12,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.pocpossdk.domain.contracts.IScannerService;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeScannerService;
-import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
+import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 import com.pocpossdk.domain.exceptions.SdkInitializerException;
 import com.pocpossdk.domain.entities.ScannerResponse;
 import com.pocpossdk.domain.enums.ScannerStatus;
@@ -29,8 +29,8 @@ public class RedeScannerModule extends ReactContextBaseJavaModule {
     super(reactContext);
 
     try {
-      if (!RedeSdkInitializer.isInitialized()) {
-        RedeSdkInitializer.initialize(reactContext);
+      if (!RedeSdkInitializerService.isInitialized()) {
+        RedeSdkInitializerService.initialize(reactContext);
       }
     } catch (SdkInitializerException e) {
       AppLogger.error(TAG, "Falha na inicialização do SDK: " + e.getMessage());
@@ -38,7 +38,7 @@ public class RedeScannerModule extends ReactContextBaseJavaModule {
       AppLogger.error(TAG, "Erro inesperado na inicialização: " + e.getMessage());
     }
 
-    this.scannerService = new RedeScannerService();
+    this.scannerService = new RedeScannerService(reactContext);
   }
 
   @NonNull
@@ -49,7 +49,7 @@ public class RedeScannerModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void scan(Promise promise) {
-    scannerService.printImageBase64()
+    scannerService.scan()
         .thenAccept(result -> {
           promise.resolve(result.toMap());
         })

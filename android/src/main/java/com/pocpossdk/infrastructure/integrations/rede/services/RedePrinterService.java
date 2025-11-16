@@ -19,7 +19,7 @@ import com.pocpossdk.domain.enums.PrinterStatus;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.shared.utils.BitmapUtils;
 import com.pocpossdk.domain.exceptions.PrinterException;
-import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializer;
+import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
@@ -38,11 +38,11 @@ public class RedePrinterService implements IPrinterService {
         throw new PrinterException("Imagem inválida para impressão");
       }
 
-      if (!RedeSdkInitializer.isInitialized()) {
+      if (!RedeSdkInitializerService.isInitialized()) {
         throw new PrinterException("SDK não inicializado");
       }
 
-      IConnectorPrinter printer = RedeSdkInitializer.getConnectorPrinter();
+      IConnectorPrinter printer = RedeSdkInitializerService.getConnectorPrinter();
 
       printer.setPrinterCallback(new IPrinterCallback() {
         @Override

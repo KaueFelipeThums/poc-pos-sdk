@@ -1,6 +1,21 @@
 buildscript {
-  ext.getExtOrDefault = {name ->
-    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['PocPosSdk_' + name]
+  ext.getExtOrDefault = { name, defaultValue = null ->
+    if (rootProject.ext.has(name)) return rootProject.ext.get(name)
+    if (project.hasProperty("PocPosSdk_$name")) return project.properties["PocPosSdk_$name"]
+    return defaultValue
+  }
+
+  ext.getExtOrIntegerDefault = { name, defaultValue = null ->
+    def value = null
+
+    if (rootProject.ext.has(name)) {
+      value = rootProject.ext.get(name)
+    } else if (project.hasProperty("PocPosSdk_$name")) {
+      value = project.properties["PocPosSdk_$name"]
+    }
+
+    if (value == null || value == "") return defaultValue
+    return Integer.parseInt(value.toString())
   }
 
   repositories {
@@ -10,7 +25,6 @@ buildscript {
 
   dependencies {
     classpath "com.android.tools.build:gradle:8.7.2"
-    // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
   }
 }
@@ -19,22 +33,9 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 apply plugin: "com.facebook.react"
 
-ext.getExtOrDefault = { name, defaultValue = null ->
-  if (rootProject.ext.has(name)) return rootProject.ext.get(name)
-  if (project.hasProperty("PocPosSdk_$name")) return project.properties["PocPosSdk_$name"]
-  return defaultValue
-}
-
 ext {
   CardAdministratorEnum = [
-    VEROUP: 'VEROUP',
-    STONE: 'STONE',
-    PAGBANK: 'PAGBANK',
     REDE: 'REDE',
-    CIELO: 'CIELO',
-    FISERV: 'FISERV',
-    SIPAG: 'SIPAG',
-    MOBILE: 'MOBILE',
   ]
 
   CardModelEnum = [
@@ -88,6 +89,8 @@ android {
   }
 }
 
+
+
 repositories {
   mavenCentral()
   google()
@@ -108,11 +111,13 @@ dependencies {
       implementation 'androidx.appcompat:appcompat:1.1.0'
       implementation 'androidx.activity:activity-ktx:1.2.0'
       implementation 'androidx.fragment:fragment-ktx:1.3.0'
+      implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
       switch (model) {
         case CardModelEnum.N960K:
           implementation fileTree(dir: 'libs/rede', include: ['sdk-rede-n960-4.3.14.release.aar'])
           break
+
         case CardModelEnum.L400:
           implementation fileTree(dir: 'libs/rede', include: ['sdk-rede-l400-4.3.9.debug.aar'])
           break

@@ -5,9 +5,11 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
-import com.pocpossdk.shared.utils.logger.AppLogger;
 
-import java.lang.reflect.constructor;
+import com.pocpossdk.shared.utils.AppLogger;
+import com.pocpossdk.BuildConfig;
+
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,9 +18,7 @@ import java.util.Collections;
 public class PocPosSdkPackage extends BaseReactPackage {
   private final String TAG = "PocPosSdkPackage";
 
-  private final String administrator = BuildConfig.ADMINISTRATOR != null
-    ? BuildConfig.ADMINISTRATOR
-    : "NONE";
+  private final String administrator = BuildConfig.ADMINISTRATOR != null ? BuildConfig.ADMINISTRATOR : "";
 
   private final Map<String, List<String>> modulesMap = Map.of(
     "REDE", List.of(
