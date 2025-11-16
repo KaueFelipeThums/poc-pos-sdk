@@ -47,6 +47,11 @@ ext {
 def administrator = getExtOrDefault("ADMINISTRATOR", "")
 def model = getExtOrDefault("MODEL", "")
 
+println "==========================================="
+println "ADMINISTRATOR    : ${administrator}"
+println "MODEL            : ${model}"
+println "==========================================="
+
 android {
   namespace "com.pocpossdk"
 
