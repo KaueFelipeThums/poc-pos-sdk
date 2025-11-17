@@ -34,11 +34,11 @@ apply plugin: "kotlin-android"
 apply plugin: "com.facebook.react"
 
 ext {
-  CardAdministratorEnum = [
+  AdministratorEnum = [
     REDE: 'REDE',
   ]
 
-  CardModelEnum = [
+  ModelEnum = [
     N960K: 'N960K',
     L400: 'L400',
   ]
@@ -92,7 +92,7 @@ android {
             "generated/jni"
           ]
 
-          if (administrator != CardAdministratorEnum.REDE) {
+          if (administrator != AdministratorEnum.REDE) {
             exclude 'com/pocpossdk/infrastructure/integrations/rede/**'
           }
         }
@@ -112,7 +112,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
   switch (administrator) {
-    case CardAdministratorEnum.REDE:
+    case AdministratorEnum.REDE:
       implementation 'com.google.code.gson:gson:2.8.5'
       implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
       implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.0'
@@ -123,11 +123,11 @@ dependencies {
       implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
       switch (model) {
-        case CardModelEnum.N960K:
+        case ModelEnum.N960K:
           implementation fileTree(dir: 'libs/rede', include: ['sdk-rede-n960-4.3.14.release.aar'])
           break
 
-        case CardModelEnum.L400:
+        case ModelEnum.L400:
           implementation fileTree(dir: 'libs/rede', include: ['sdk-rede-l400-4.3.9.debug.aar'])
           break
       }
