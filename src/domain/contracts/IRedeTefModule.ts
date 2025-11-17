@@ -1,11 +1,11 @@
-import type { RedePaymentExtras } from '../../infrastructure/adapters/rede/types/rede-payment.types';
+import type { IExtras } from '../entities/IExtras';
 import type { PaymentRequest } from '../entities/PaymentRequest';
 import type { PaymentResponse } from '../entities/PaymentResponse';
 import type { TefCapabilities } from '../enums/TefCapabilities';
 
 export interface IRedeTefModule {
-  payment(
-    request: PaymentRequest<RedePaymentExtras>
-  ): Promise<PaymentResponse<RedePaymentExtras>>;
+  payment<TData extends IExtras = IExtras>(
+    request: PaymentRequest<TData>
+  ): Promise<PaymentResponse<TData>>;
   getCapabilities(): Promise<TefCapabilities[]>;
 }

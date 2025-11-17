@@ -1,5 +1,6 @@
 import {
   InstallmentType,
+  PaymentStatus,
   PaymentType,
   PosSdk,
   PosSdkAdministrator,
@@ -12,15 +13,31 @@ const sdkInstance = PosSdk.init(PosSdkAdministrator.REDE);
 
 export default function App() {
   useEffect(() => {
-    sdkInstance.tef.payment({
-      installments: 1,
-      installmentType: InstallmentType.CREDIT_ISSUER,
-      type: PaymentType.DEBIT,
-      value: 1000,
-      extras: {
-        redePackageName: 'com.example.app',
-      },
-    });
+    const makePayment = async () => {
+      const response = await sdkInstance.tef.payment({
+        installments: 1,
+        installmentType: InstallmentType.CREDIT_ISSUER,
+        type: PaymentType.DEBIT,
+        value: 1000, // INTEGER VALUE IN CENTS (1000 = R$10.00)
+        extras: {
+          // REDE
+          redePackageName: 'com.example.app',
+
+          // CLOVER
+          cloverCnpj: '12345678000195',
+          cloverTerminalId: '12345678',
+          cloverStoreId: '123456789',
+        },
+      });
+
+      if (response.status === PaymentStatus.SUCCESS) {
+        console.log('Payment Successful:', response.data);
+      } else {
+        console.log('Payment Failed or Canceled:', response);
+      }
+    };
+
+    makePayment();
   }, []);
 
   return (

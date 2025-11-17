@@ -74,6 +74,8 @@ export default defineConfig([
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       'no-unused-vars': 'off',
+      'no-undef': 'off',
+      'no-console': 'off',
 
       // React Hooks
       'react-hooks/exhaustive-deps': 'warn',
