@@ -1,8 +1,8 @@
-import type { ITefModule } from '@/domain/contracts/ITefModule';
-import type { IExtras } from '@/domain/entities/IExtras';
-import type { PaymentRequest } from '@/domain/entities/PaymentRequest';
-import type { PaymentResponse } from '@/domain/entities/PaymentResponse';
-import type { TefCapabilities } from '@/domain/enums/TefCapabilities';
+import type { ITefModule } from '../../domain/contracts/ITefModule';
+import type { IExtras } from '../../domain/entities/IExtras';
+import type { PaymentRequest } from '../../domain/entities/PaymentRequest';
+import type { PaymentResponse } from '../../domain/entities/PaymentResponse';
+import type { TefCapabilities } from '../../domain/enums/TefCapabilities';
 
 export class TefModule {
   constructor(private readonly tefAdapter: ITefModule) {}

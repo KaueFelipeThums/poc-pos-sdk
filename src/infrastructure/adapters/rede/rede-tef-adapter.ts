@@ -1,9 +1,9 @@
-import type { ITefModule } from '@/domain/contracts/ITefModule';
-import type { IExtras } from '@/domain/entities/IExtras';
-import type { PaymentRequest } from '@/domain/entities/PaymentRequest';
-import type { PaymentResponse } from '@/domain/entities/PaymentResponse';
-import type { TefCapabilities } from '@/domain/enums/TefCapabilities';
-import { RedeTefNative } from '@/infrastructure/native/rede';
+import type { ITefModule } from '../../../domain/contracts/ITefModule';
+import type { IExtras } from '../../../domain/entities/IExtras';
+import type { PaymentRequest } from '../../../domain/entities/PaymentRequest';
+import type { PaymentResponse } from '../../../domain/entities/PaymentResponse';
+import type { TefCapabilities } from '../../../domain/enums/TefCapabilities';
+import { RedeTefNative } from '../../native/rede';
 
 export class RedeTefAdapter implements ITefModule {
   async payment<

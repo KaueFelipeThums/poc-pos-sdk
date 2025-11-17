@@ -1,6 +1,6 @@
-import { PaymentStatus } from '@/domain/enums/PaymentStatus';
 import type { IExtras } from './IExtras';
 import type { PaymentResponseData } from './PaymentResponseData';
+import { PaymentStatus } from '../enums/PaymentStatus';
 type PaymentResponseError = {
     status: Exclude<PaymentStatus, PaymentStatus.SUCCESS>;
     message: string;

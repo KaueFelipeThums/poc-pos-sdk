@@ -1,5 +1,5 @@
-import type { Receipt } from '@/domain/valueObjects/Receipt';
 import type { IExtras } from './IExtras';
+import type { Receipt } from '../valueObjects/Receipt';
 
 export interface PaymentResponseData<TExtras extends IExtras = IExtras> {
   authorizationCode: string;

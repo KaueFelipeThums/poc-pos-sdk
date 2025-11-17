@@ -1,13 +1,13 @@
-import type { IPrinterModule } from '@/domain/contracts/IPrinterModule';
-import type { IScannerModule } from '@/domain/contracts/IScannerModule';
-import type { ITefModule } from '@/domain/contracts/ITefModule';
-import { PosSdkAdministrator } from '@/domain/enums/PosSdkAdministrator';
-import { RedePrinterAdapter } from '@/infrastructure/adapters/rede/rede-printer-adapter';
-import { RedeScannerAdapter } from '@/infrastructure/adapters/rede/rede-scanner-adapter';
-import { RedeTefAdapter } from '@/infrastructure/adapters/rede/rede-tef-adapter';
 import { PrinterModule } from './modules/printer-module';
 import { ScannerModule } from './modules/scanner-module';
 import { TefModule } from './modules/tef-module';
+import type { IPrinterModule } from '../domain/contracts/IPrinterModule';
+import type { IScannerModule } from '../domain/contracts/IScannerModule';
+import type { ITefModule } from '../domain/contracts/ITefModule';
+import { PosSdkAdministrator } from '../domain/enums/PosSdkAdministrator';
+import { RedePrinterAdapter } from '../infrastructure/adapters/rede/rede-printer-adapter';
+import { RedeScannerAdapter } from '../infrastructure/adapters/rede/rede-scanner-adapter';
+import { RedeTefAdapter } from '../infrastructure/adapters/rede/rede-tef-adapter';
 
 export interface PosSdkConfig {
   administrator: PosSdkAdministrator;

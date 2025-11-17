@@ -1,7 +1,7 @@
-import { PosSdkAdministrator } from '@/domain/enums/PosSdkAdministrator';
 import { PrinterModule } from './modules/printer-module';
 import { ScannerModule } from './modules/scanner-module';
 import { TefModule } from './modules/tef-module';
+import { PosSdkAdministrator } from '../domain/enums/PosSdkAdministrator';
 export interface PosSdkConfig {
     administrator: PosSdkAdministrator;
 }

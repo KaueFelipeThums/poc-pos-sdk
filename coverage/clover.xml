@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1763388463010" clover="3.2.0">
-  <project timestamp="1763388463010" name="All files">
+<coverage generated="1763389187331" clover="3.2.0">
+  <project timestamp="1763389187332" name="All files">
     <metrics statements="136" coveredstatements="92" conditionals="30" coveredconditionals="24" methods="34" coveredmethods="25" elements="200" coveredelements="141" complexity="0" loc="136" ncloc="136" packages="7" files="22" classes="22"/>
     <package name="domain.contracts">
       <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -17,16 +17,16 @@
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="PaymentRequest.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/entities/PaymentRequest.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
       </file>
       <file name="PaymentResponse.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/entities/PaymentResponse.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
       </file>
       <file name="PrinterResponse.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/entities/PrinterResponse.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="0" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
       </file>
     </package>
     <package name="domain.enums">
@@ -169,9 +169,9 @@
       <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="7"/>
       <file name="PosSdk.ts" path="/home/kauethums/projects/poc-pos-sdk/src/presentation/PosSdk.ts">
         <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="7"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
         <line num="7" count="3" type="stmt"/>
         <line num="8" count="3" type="stmt"/>
         <line num="9" count="3" type="stmt"/>

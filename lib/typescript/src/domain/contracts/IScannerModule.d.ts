@@ -1,5 +1,5 @@
-import type { ScannerResponse } from '@/domain/entities/ScannerResponse';
-import type { ScannerCapabilities } from '@/domain/enums/ScannerCapabilities';
+import type { ScannerResponse } from '../entities/ScannerResponse';
+import type { ScannerCapabilities } from '../enums/ScannerCapabilities';
 export interface IScannerModule {
     scan(): Promise<ScannerResponse>;
     getCapabilities(): ScannerCapabilities[];

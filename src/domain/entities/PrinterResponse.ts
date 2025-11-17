@@ -1,5 +1,5 @@
-import { PrinterStatus } from '@/domain/enums/PrinterStatus';
 import type { IExtras } from './IExtras';
+import { PrinterStatus } from '../enums/PrinterStatus';
 
 export interface PrinterResponse<TData extends IExtras = IExtras> {
   status: PrinterStatus;

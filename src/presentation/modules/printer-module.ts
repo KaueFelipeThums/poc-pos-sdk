@@ -1,8 +1,8 @@
-import type { IPrinterModule } from '@/domain/contracts/IPrinterModule';
-import type { IExtras } from '@/domain/entities/IExtras';
-import type { PrinterResponse } from '@/domain/entities/PrinterResponse';
-import type { PrinterCapabilities } from '@/domain/enums/PrinterCapabilities';
-import { PrinterStatus } from '@/domain/enums/PrinterStatus';
+import type { IPrinterModule } from '../../domain/contracts/IPrinterModule';
+import type { IExtras } from '../../domain/entities/IExtras';
+import type { PrinterResponse } from '../../domain/entities/PrinterResponse';
+import type { PrinterCapabilities } from '../../domain/enums/PrinterCapabilities';
+import { PrinterStatus } from '../../domain/enums/PrinterStatus';
 
 export class PrinterModule {
   constructor(private readonly printerAdapter: IPrinterModule) {}
