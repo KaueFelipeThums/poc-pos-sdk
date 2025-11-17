@@ -4,8 +4,11 @@ import type { PaymentResponse } from '../entities/PaymentResponse';
 import { TefCapabilities } from '../enums/TefCapabilities';
 
 export interface ITefModule {
-  payment<TExtras extends IExtras = IExtras>(
+  payment<
+    TExtras extends IExtras = IExtras,
+    TRExtras extends IExtras = IExtras,
+  >(
     request: PaymentRequest<TExtras>
-  ): Promise<PaymentResponse<TExtras>>;
+  ): Promise<PaymentResponse<TRExtras>>;
   getCapabilities(): TefCapabilities[];
 }

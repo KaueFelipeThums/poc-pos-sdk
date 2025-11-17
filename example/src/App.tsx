@@ -34,7 +34,7 @@ export default function App() {
       console.log('Scanner Capabilities:', capabilities);
 
       if (response.status === PaymentStatus.SUCCESS) {
-        console.log('Payment Successful:', response.data);
+        console.log('Payment Successful:', response.data.extras?.transactionId);
       } else {
         console.log('Payment Failed or Canceled:', response);
       }

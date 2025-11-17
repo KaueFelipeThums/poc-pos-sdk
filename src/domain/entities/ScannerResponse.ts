@@ -1,7 +1,15 @@
 import type { ScannerStatus } from '../enums/ScannerStatus';
 
-export interface ScannerResponse {
-  status: ScannerStatus;
+type ScannerResponseSuccess = {
+  status: ScannerStatus.SUCCESS;
   message: string;
-  data: string | null;
-}
+  data: string;
+};
+
+type ScannerResponseError = {
+  status: Exclude<ScannerStatus, ScannerStatus.SUCCESS>;
+  message: string;
+  data: null;
+};
+
+export type ScannerResponse = ScannerResponseSuccess | ScannerResponseError;

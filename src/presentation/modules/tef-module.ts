@@ -7,9 +7,10 @@ import type { TefCapabilities } from '../../domain/enums/TefCapabilities';
 export class TefModule {
   constructor(private readonly tefAdapter: ITefModule) {}
 
-  async payment<TExtras extends IExtras = IExtras>(
-    request: PaymentRequest<TExtras>
-  ): Promise<PaymentResponse<TExtras>> {
+  async payment<
+    TExtras extends IExtras = IExtras,
+    TRExtras extends IExtras = IExtras,
+  >(request: PaymentRequest<TExtras>): Promise<PaymentResponse<TRExtras>> {
     return this.tefAdapter.payment(request);
   }
 

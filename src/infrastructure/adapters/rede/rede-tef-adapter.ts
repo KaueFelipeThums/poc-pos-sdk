@@ -6,13 +6,14 @@ import type { TefCapabilities } from '../../../domain/enums/TefCapabilities';
 import { RedeTefNative } from '../../native/rede';
 
 export class RedeTefAdapter implements ITefModule {
-  async payment<TExtras extends IExtras = IExtras>(
-    request: PaymentRequest<TExtras>
-  ): Promise<PaymentResponse<TExtras>> {
+  async payment<
+    TExtras extends IExtras = IExtras,
+    TRExtras extends IExtras = IExtras,
+  >(request: PaymentRequest<TExtras>): Promise<PaymentResponse<TRExtras>> {
     try {
       const jsonRequest = JSON.stringify(request);
       const jsonResponse = await RedeTefNative.payment(jsonRequest);
-      return JSON.parse(jsonResponse) as PaymentResponse<TExtras>;
+      return JSON.parse(jsonResponse) as PaymentResponse<TRExtras>;
     } catch (error) {
       throw new Error(`Erro ao processar pagamento: ${error}`);
     }

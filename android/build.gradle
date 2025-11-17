@@ -48,8 +48,8 @@ def administrator = getExtOrDefault("ADMINISTRATOR", "")
 def model = getExtOrDefault("MODEL", "")
 
 println "==========================================="
-println "ADMINISTRATOR    : ${administrator}"
-println "MODEL            : ${model}"
+println "ADMINISTRATOR        : ${administrator}"
+println "MODEL                : ${model}"
 println "==========================================="
 
 android {
@@ -99,8 +99,6 @@ android {
     }
   }
 }
-
-
 
 repositories {
   mavenCentral()
