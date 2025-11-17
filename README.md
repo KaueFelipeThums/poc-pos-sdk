@@ -10,7 +10,7 @@ SDK React Native para integração com terminais POS (Point of Sale) de diferent
 import PosSdk, { PosSdkAdministrator } from '@your-org/poc-pos-sdk';
 
 // Inicializar o SDK com a administradora desejada
-await PosSdk.init(PosSdkAdministrator.REDE);
+PosSdk.init(PosSdkAdministrator.REDE);
 
 // Obter instância do SDK
 const sdk = PosSdk.getInstance();
@@ -222,9 +222,7 @@ import PosSdk, {
 } from '@your-org/poc-pos-sdk';
 
 async function processarPagamentoDebito() {
-  await PosSdk.init({
-    administrator: PosSdkAdministrator.REDE
-  });
+  PosSdk.init(PosSdkAdministrator.REDE);
 
   const sdk = PosSdk.getInstance();
 
