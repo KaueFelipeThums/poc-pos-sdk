@@ -1,4 +1,4 @@
-import type { ScannerStatus } from '../enums/ScannerStatus';
+import type { ScannerStatus } from '@/domain/enums/ScannerStatus';
 
 type ScannerResponseSuccess = {
   status: ScannerStatus.SUCCESS;

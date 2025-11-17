@@ -1,9 +1,9 @@
-import type { ITefModule } from '../../../domain/contracts/ITefModule';
-import type { IExtras } from '../../../domain/entities/IExtras';
-import type { PaymentRequest } from '../../../domain/entities/PaymentRequest';
-import type { PaymentResponse } from '../../../domain/entities/PaymentResponse';
-import type { TefCapabilities } from '../../../domain/enums/TefCapabilities';
-import { RedeTefNative } from '../../native/rede';
+import type { ITefModule } from '@/domain/contracts/ITefModule';
+import type { IExtras } from '@/domain/entities/IExtras';
+import type { PaymentRequest } from '@/domain/entities/PaymentRequest';
+import type { PaymentResponse } from '@/domain/entities/PaymentResponse';
+import type { TefCapabilities } from '@/domain/enums/TefCapabilities';
+import { RedeTefNative } from '@/infrastructure/native/rede';
 
 export class RedeTefAdapter implements ITefModule {
   async payment<
@@ -11,9 +11,8 @@ export class RedeTefAdapter implements ITefModule {
     TRExtras extends IExtras = IExtras,
   >(request: PaymentRequest<TExtras>): Promise<PaymentResponse<TRExtras>> {
     try {
-      const jsonRequest = JSON.stringify(request);
-      const jsonResponse = await RedeTefNative.payment(jsonRequest);
-      return JSON.parse(jsonResponse) as PaymentResponse<TRExtras>;
+      const jsonResponse = await RedeTefNative.payment(request);
+      return jsonResponse as PaymentResponse<TRExtras>;
     } catch (error) {
       throw new Error(`Erro ao processar pagamento: ${error}`);
     }

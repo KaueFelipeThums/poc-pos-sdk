@@ -1,7 +1,7 @@
-import type { IExtras } from '../entities/IExtras';
-import type { PaymentRequest } from '../entities/PaymentRequest';
-import type { PaymentResponse } from '../entities/PaymentResponse';
-import { TefCapabilities } from '../enums/TefCapabilities';
+import type { IExtras } from '@/domain/entities/IExtras';
+import type { PaymentRequest } from '@/domain/entities/PaymentRequest';
+import type { PaymentResponse } from '@/domain/entities/PaymentResponse';
+import { TefCapabilities } from '@/domain/enums/TefCapabilities';
 
 export interface ITefModule {
   payment<

@@ -1,13 +1,13 @@
-import type { IScannerModule } from '../../../domain/contracts/IScannerModule';
-import type { ScannerResponse } from '../../../domain/entities/ScannerResponse';
-import type { ScannerCapabilities } from '../../../domain/enums/ScannerCapabilities';
-import { RedeScannerNative } from '../../native/rede';
+import type { IScannerModule } from '@/domain/contracts/IScannerModule';
+import type { ScannerResponse } from '@/domain/entities/ScannerResponse';
+import type { ScannerCapabilities } from '@/domain/enums/ScannerCapabilities';
+import { RedeScannerNative } from '@/infrastructure/native/rede';
 
 export class RedeScannerAdapter implements IScannerModule {
   async scan(): Promise<ScannerResponse> {
     try {
       const jsonResponse = await RedeScannerNative.scan();
-      return JSON.parse(jsonResponse) as ScannerResponse;
+      return jsonResponse as ScannerResponse;
     } catch (error) {
       throw new Error(`Erro ao escanear: ${error}`);
     }

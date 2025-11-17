@@ -1,12 +1,12 @@
 import { NativeModules } from 'react-native';
-import type { IPrinterNativeModule } from '@/domain/contracts/IPrinterNativeModule';
-import type { IScannerNativeModule } from '@/domain/contracts/IScannerNativeModule';
-import type { ITefNativeModule } from '@/domain/contracts/ITefNativeModule';
+import type { IPrinterModule } from '@/domain/contracts/IPrinterModule';
+import type { IScannerModule } from '@/domain/contracts/IScannerModule';
+import type { ITefModule } from '@/domain/contracts/ITefModule';
 
 const ERROR = 'O pacote não está vinculado corretamente.';
 
 export const RedePrinterNative = NativeModules.RedePrinterModule
-  ? (NativeModules.RedePrinterModule as IPrinterNativeModule)
+  ? (NativeModules.RedePrinterModule as IPrinterModule)
   : (new Proxy(
       {},
       {
@@ -14,10 +14,10 @@ export const RedePrinterNative = NativeModules.RedePrinterModule
           throw new Error(ERROR);
         },
       }
-    ) as IPrinterNativeModule);
+    ) as IPrinterModule);
 
 export const RedeTefNative = NativeModules.RedeTefModule
-  ? (NativeModules.RedeTefModule as ITefNativeModule)
+  ? (NativeModules.RedeTefModule as ITefModule)
   : (new Proxy(
       {},
       {
@@ -25,10 +25,10 @@ export const RedeTefNative = NativeModules.RedeTefModule
           throw new Error(ERROR);
         },
       }
-    ) as ITefNativeModule);
+    ) as ITefModule);
 
 export const RedeScannerNative = NativeModules.RedeScannerModule
-  ? (NativeModules.RedeScannerModule as IScannerNativeModule)
+  ? (NativeModules.RedeScannerModule as IScannerModule)
   : (new Proxy(
       {},
       {
@@ -36,4 +36,4 @@ export const RedeScannerNative = NativeModules.RedeScannerModule
           throw new Error(ERROR);
         },
       }
-    ) as IScannerNativeModule);
+    ) as IScannerModule);
