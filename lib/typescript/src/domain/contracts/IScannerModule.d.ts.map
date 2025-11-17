@@ -1,0 +1,1 @@
+{"version":3,"file":"IScannerModule.d.ts","sourceRoot":"","sources":["../../../../../src/domain/contracts/IScannerModule.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,mCAAmC,CAAC;AACzE,OAAO,KAAK,EAAE,mBAAmB,EAAE,MAAM,oCAAoC,CAAC;AAE9E,MAAM,WAAW,cAAc;IAC7B,IAAI,IAAI,OAAO,CAAC,eAAe,CAAC,CAAC;IACjC,eAAe,IAAI,mBAAmB,EAAE,CAAC;CAC1C"}

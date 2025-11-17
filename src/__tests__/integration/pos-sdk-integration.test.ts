@@ -18,16 +18,13 @@ describe('PosSdk - Testes de Integração', () => {
 
   describe('Fluxo completo de pagamento', () => {
     it('deve realizar um fluxo completo de pagamento', async () => {
-      // Inicializar o SDK
       const sdk = PosSdk.init(PosSdkAdministrator.REDE);
 
-      // Validar inicialização
       expect(sdk).toBeDefined();
       expect(sdk.tef).toBeDefined();
       expect(sdk.printer).toBeDefined();
       expect(sdk.scanner).toBeDefined();
 
-      // Realizar pagamento
       const paymentRequest: PaymentRequest = {
         type: PaymentType.CREDIT,
         value: 50000, // R$ 500,00
@@ -38,12 +35,10 @@ describe('PosSdk - Testes de Integração', () => {
 
       const paymentResponse = await sdk.tef.payment(paymentRequest);
 
-      // Validar resposta do pagamento
       expect(paymentResponse.status).toBe(PaymentStatus.SUCCESS);
       expect(paymentResponse.data).not.toBeNull();
 
       if (paymentResponse.status === PaymentStatus.SUCCESS) {
-        // Imprimir recibo do cliente
         const customerReceipt = paymentResponse.data.receipt?.customerCopy;
         if (customerReceipt) {
           const printResponse =
@@ -56,7 +51,6 @@ describe('PosSdk - Testes de Integração', () => {
     it('deve realizar pagamento parcelado e imprimir comprovante', async () => {
       const sdk = PosSdk.init(PosSdkAdministrator.REDE);
 
-      // Pagamento parcelado
       const paymentRequest: PaymentRequest = {
         type: PaymentType.CREDIT,
         value: 120000, // R$ 1.200,00
@@ -72,7 +66,6 @@ describe('PosSdk - Testes de Integração', () => {
       if (paymentResponse.status === PaymentStatus.SUCCESS) {
         expect(paymentResponse.data.amount).toBe(120000);
 
-        // Imprimir via estabelecimento
         const merchantReceipt = paymentResponse.data.receipt?.merchantCopy;
         if (merchantReceipt) {
           const printResponse =
@@ -99,11 +92,9 @@ describe('PosSdk - Testes de Integração', () => {
     it('deve executar múltiplas operações em sequência', async () => {
       const sdk = PosSdk.init(PosSdkAdministrator.REDE);
 
-      // Primeira operação: scan
       const scan1 = await sdk.scanner.scan();
       expect(scan1.status).toBe(ScannerStatus.SUCCESS);
 
-      // Segunda operação: pagamento
       const payment: PaymentRequest = {
         type: PaymentType.DEBIT,
         value: 10000,

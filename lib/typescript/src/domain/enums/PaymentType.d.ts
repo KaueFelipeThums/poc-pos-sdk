@@ -1,0 +1,20 @@
+export declare enum PaymentType {
+    CASH = "CASH",
+    CHECK = "CHECK",
+    CREDIT = "CREDIT",
+    DEBIT = "DEBIT",
+    INSTALLMENT = "INSTALLMENT",
+    FOOD_VOUCHER = "FOOD_VOUCHER",
+    MEAL_VOUCHER = "MEAL_VOUCHER",
+    GIFT_VOUCHER = "GIFT_VOUCHER",
+    FUEL_VOUCHER = "FUEL_VOUCHER",
+    BANK_SLIP = "BANK_SLIP",
+    BANK_DEPOSIT = "BANK_DEPOSIT",
+    PIX = "PIX",
+    TRANSFER = "TRANSFER",
+    LOYALTY = "LOYALTY",
+    NO_PAYMENT = "NO_PAYMENT",
+    DEFERRED_PAYMENT = "DEFERRED_PAYMENT",
+    OTHER = "OTHER"
+}
+//# sourceMappingURL=PaymentType.d.ts.map

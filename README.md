@@ -2,6 +2,53 @@
 
 SDK React Native para integração com terminais POS (Point of Sale) de diferentes administradoras de pagamento. Implementado com Clean Architecture para máxima extensibilidade e manutenibilidade.
 
+## 📦 Instalação
+
+### Via GitHub
+
+```bash
+# Yarn
+yarn add KaueFelipeThums/poc-pos-sdk
+
+# NPM
+npm install KaueFelipeThums/poc-pos-sdk
+
+# Ou especificando uma branch/tag/commit
+yarn add KaueFelipeThums/poc-pos-sdk#main
+yarn add KaueFelipeThums/poc-pos-sdk#v0.1.0
+yarn add KaueFelipeThums/poc-pos-sdk#commit-hash
+```
+
+### Via NPM (quando publicado)
+
+```bash
+# Yarn
+yarn add poc-pos-sdk
+
+# NPM
+npm install poc-pos-sdk
+```
+
+### Configuração Android
+
+Adicione o repositório Maven da Rede no seu `android/build.gradle`:
+
+```gradle
+allprojects {
+    repositories {
+        // ... outros repositórios
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Certifique-se de ter as permissões necessárias no `AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
 ## 🚀 Inicialização
 
 ### Configuração Básica
