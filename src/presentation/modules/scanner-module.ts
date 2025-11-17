@@ -9,7 +9,7 @@ export class ScannerModule {
     return this.scannerAdapter.scan();
   }
 
-  async getCapabilities(): Promise<ScannerCapabilities[]> {
+  getCapabilities(): ScannerCapabilities[] {
     return this.scannerAdapter.getCapabilities();
   }
 }

@@ -23,10 +23,10 @@ export class RedeScannerAdapter implements IScannerModule {
     }
   }
 
-  async getCapabilities(): Promise<ScannerCapabilities[]> {
+  getCapabilities(): ScannerCapabilities[] {
     try {
-      // Rede sempre suporta scan
-      return ['SCAN' as ScannerCapabilities];
+      const capabilities = RedeScannerNative.getCapabilities();
+      return capabilities as ScannerCapabilities[];
     } catch (error) {
       throw new Error(`Erro ao obter capabilities: ${error}`);
     }

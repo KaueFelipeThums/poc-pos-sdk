@@ -21,7 +21,7 @@ export class PrinterModule {
     return this.printerAdapter.printImageBase64(base64Image);
   }
 
-  async getCapabilities(): Promise<PrinterCapabilities[]> {
+  getCapabilities(): PrinterCapabilities[] {
     return this.printerAdapter.getCapabilities();
   }
 }

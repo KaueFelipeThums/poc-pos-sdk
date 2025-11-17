@@ -63,10 +63,10 @@ public class RedeScannerModule extends ReactContextBaseJavaModule {
         });
   }
 
-  @ReactMethod
-  public void getCapabilities(Promise promise) {
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public WritableArray getCapabilities() {
     WritableArray capabilities = Arguments.createArray();
     capabilities.pushString(ScannerCapabilities.SCAN.name());
-    promise.resolve(capabilities);
+    return capabilities;
   }
 }

@@ -13,7 +13,7 @@ export class TefModule {
     return this.tefAdapter.payment(request);
   }
 
-  async getCapabilities(): Promise<TefCapabilities[]> {
+  getCapabilities(): TefCapabilities[] {
     return this.tefAdapter.getCapabilities();
   }
 }

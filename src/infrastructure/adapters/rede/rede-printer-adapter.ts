@@ -17,9 +17,9 @@ export class RedePrinterAdapter implements IPrinterModule {
     }
   }
 
-  async getCapabilities(): Promise<PrinterCapabilities[]> {
+  getCapabilities(): PrinterCapabilities[] {
     try {
-      const capabilities = await RedePrinterNative.getCapabilities();
+      const capabilities = RedePrinterNative.getCapabilities();
       return capabilities as PrinterCapabilities[];
     } catch (error) {
       throw new Error(`Erro ao obter capabilities: ${error}`);

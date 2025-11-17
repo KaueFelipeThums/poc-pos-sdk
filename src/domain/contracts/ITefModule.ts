@@ -7,5 +7,5 @@ export interface ITefModule {
   payment<TExtras extends IExtras = IExtras>(
     request: PaymentRequest<TExtras>
   ): Promise<PaymentResponse<TExtras>>;
-  getCapabilities(): Promise<TefCapabilities[]>;
+  getCapabilities(): TefCapabilities[];
 }

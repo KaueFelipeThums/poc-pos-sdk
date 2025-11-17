@@ -37,14 +37,13 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
     this.context = context;
   }
 
-  @Override
   public <TExtras> CompletableFuture<PaymentResponse> payment(PaymentRequest<TExtras> paymentRequest) {
     if (future != null && !future.isDone()) {
-        CompletableFuture<PaymentResponse> error = new CompletableFuture<>();
-        error.complete(new PaymentResponse<>(
-            PaymentStatus.INVALID_REQUEST,
-            PaymentStatus.INVALID_REQUEST.getDescription() + ": Já existe uma transação em andamento"));
-        return error;
+      CompletableFuture<PaymentResponse> error = new CompletableFuture<>();
+      error.complete(new PaymentResponse<>(
+          PaymentStatus.INVALID_REQUEST,
+          PaymentStatus.INVALID_REQUEST.getDescription() + ": Já existe uma transação em andamento"));
+      return error;
     }
 
     AppLogger.info(TAG, "Iniciando pagamento");
@@ -68,8 +67,9 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
           redePaymentRequest.getInstallments(),
           redePaymentRequest.getInstallmentType());
 
-      if(paymentType == null) {
-        throw new TefException("Tipo de pagamento '" + redePaymentRequest.getType().getDescription() + "' não suportado");
+      if (paymentType == null) {
+        throw new TefException(
+            "Tipo de pagamento '" + redePaymentRequest.getType().getDescription() + "' não suportado");
       }
 
       if (!paymentType.equals(FlexTipoPagamento.CREDITO_PARCELADO) &&
@@ -124,9 +124,8 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
 
     if (resultCode == Activity.RESULT_CANCELED || data == null) {
       resolveFuture(new PaymentResponse<>(
-        PaymentStatus.CANCELED,
-        PaymentStatus.CANCELED.getDescription()
-      ));
+          PaymentStatus.CANCELED,
+          PaymentStatus.CANCELED.getDescription()));
       return;
     }
 
@@ -148,7 +147,7 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
 
   private void resolveFuture(PaymentResponse<RedePaymentExtras> response) {
     if (future != null && !future.isDone()) {
-        future.complete(response);
+      future.complete(response);
     }
     future = null;
   }

@@ -30,6 +30,9 @@ export default function App() {
         },
       });
 
+      const capabilities = sdkInstance.scanner.getCapabilities();
+      console.log('Scanner Capabilities:', capabilities);
+
       if (response.status === PaymentStatus.SUCCESS) {
         console.log('Payment Successful:', response.data);
       } else {

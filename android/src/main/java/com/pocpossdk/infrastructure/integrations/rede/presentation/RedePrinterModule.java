@@ -63,10 +63,10 @@ public class RedePrinterModule extends ReactContextBaseJavaModule {
         });
   }
 
-  @ReactMethod
-  public void getCapabilities(Promise promise) {
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public WritableArray getCapabilities() {
     WritableArray capabilities = Arguments.createArray();
     capabilities.pushString(PrinterCapabilities.PRINT_BASE64_IMAGE.name());
-    promise.resolve(capabilities);
+    return capabilities;
   }
 }

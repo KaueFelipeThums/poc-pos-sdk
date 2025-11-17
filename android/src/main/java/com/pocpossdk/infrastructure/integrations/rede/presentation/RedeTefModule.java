@@ -90,8 +90,8 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
     } catch (Exception e) {
       AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
       PaymentResponse errorResponse = new PaymentResponse<>(
-              PaymentStatus.UNKNOWN_ERROR,
-              PaymentStatus.UNKNOWN_ERROR.getDescription());
+          PaymentStatus.UNKNOWN_ERROR,
+          PaymentStatus.UNKNOWN_ERROR.getDescription());
       promise.resolve(errorResponse.toMap());
     }
   }
@@ -103,10 +103,10 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
     }
   };
 
-  @ReactMethod
-  public void getCapabilities(Promise promise) {
+  @ReactMethod(isBlockingSynchronousMethod = true)
+  public WritableArray getCapabilities() {
     WritableArray capabilities = Arguments.createArray();
     capabilities.pushString(TefCapabilities.PAYMENT.name());
-    promise.resolve(capabilities);
+    return capabilities;
   }
 }

@@ -6,5 +6,5 @@ export interface IPrinterModule {
   printImageBase64<TData extends IExtras = IExtras>(
     base64Image: string
   ): Promise<PrinterResponse<TData>>;
-  getCapabilities(): Promise<PrinterCapabilities[]>;
+  getCapabilities(): PrinterCapabilities[];
 }
