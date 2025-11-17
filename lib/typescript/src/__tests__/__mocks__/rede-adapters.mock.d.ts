@@ -1,1 +1,0 @@
-//# sourceMappingURL=rede-adapters.mock.d.ts.map
