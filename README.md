@@ -102,7 +102,7 @@ enum PaymentStatus {
 ### Obter Capacidades do TEF
 
 ```typescript
-import { TefCapabilities } from '@your-org/poc-pos-sdk';
+import { TefCapabilities } from 'poc-pos-sdk';
 
 const capabilities = await sdk.tef.getCapabilities();
 
@@ -117,7 +117,7 @@ if (capabilities.includes(TefCapabilities.PAYMENT)) {
 ### Imprimir Imagem Base64
 
 ```typescript
-import { PrinterStatus } from '@your-org/poc-pos-sdk';
+import { PrinterStatus } from 'poc-pos-sdk';
 
 const base64Image = 'iVBORw0KGgoAAAANSUhEUgAAAAUA...'; // Sua imagem em Base64
 
@@ -145,7 +145,7 @@ enum PrinterStatus {
 ### Obter Capacidades da Impressora
 
 ```typescript
-import { PrinterCapabilities } from '@your-org/poc-pos-sdk';
+import { PrinterCapabilities } from 'poc-pos-sdk';
 
 const capabilities = await sdk.printer.getCapabilities();
 
@@ -217,7 +217,7 @@ import PosSdk, {
   PaymentType,
   InstallmentType,
   PaymentStatus
-} from '@your-org/poc-pos-sdk';
+} from 'poc-pos-sdk';
 
 async function processarPagamentoDebito() {
   PosSdk.init(PosSdkAdministrator.REDE);
@@ -292,7 +292,7 @@ async function processarPagamentoPix() {
 ### Exemplo 4: Imprimir Comprovante
 
 ```typescript
-import { PrinterStatus } from '@your-org/poc-pos-sdk';
+import { PrinterStatus } from 'poc-pos-sdk';
 
 async function imprimirComprovante(comprovanteBase64: string) {
   const sdk = PosSdk.getInstance();
@@ -322,7 +322,7 @@ Para mais detalhes, consulte [CLEAN_ARCHITECTURE.md](./CLEAN_ARCHITECTURE.md)
 ## 🔧 Tratamento de Erros
 
 ```typescript
-import { PaymentStatus } from '@your-org/poc-pos-sdk';
+import { PaymentStatus } from 'poc-pos-sdk';
 
 try {
   const response = await sdk.tef.payment(paymentRequest);
