@@ -1,0 +1,1 @@
+{"version":3,"names":["ModuleUnavailableError","Error","constructor","moduleName","name"],"sourceRoot":"../../../../src","sources":["domain/exceptions/ModuleUnavailableError.ts"],"mappings":";;AAAA,OAAO,MAAMA,sBAAsB,SAASC,KAAK,CAAC;EAChDC,WAAWA,CAACC,UAAkB,EAAE;IAC9B,KAAK,CAAC,GAAGA,UAAU,uBAAuB,CAAC;IAC3C,IAAI,CAACC,IAAI,GAAG,wBAAwB;EACtC;AACF","ignoreList":[]}

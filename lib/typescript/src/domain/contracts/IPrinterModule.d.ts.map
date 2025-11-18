@@ -1,0 +1,1 @@
+{"version":3,"file":"IPrinterModule.d.ts","sourceRoot":"","sources":["../../../../../src/domain/contracts/IPrinterModule.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,6BAA6B,CAAC;AACnE,OAAO,EAAE,mBAAmB,EAAE,MAAM,8BAA8B,CAAC;AAEnE,MAAM,WAAW,cAAc;IAC7B,gBAAgB,CAAC,WAAW,EAAE,MAAM,GAAG,OAAO,CAAC,eAAe,CAAC,CAAC;IAChE,eAAe,IAAI,mBAAmB,EAAE,CAAC;CAC1C"}

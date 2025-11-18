@@ -1,0 +1,7 @@
+export declare enum ScannerStatus {
+    SUCCESS = "SUCCESS",
+    NO_CODE_DETECTED = "NO_CODE_DETECTED",
+    UNKNOWN_ERROR = "UNKNOWN_ERROR",
+    MODULE_NOT_AVAILABLE = "MODULE_NOT_AVAILABLE"
+}
+//# sourceMappingURL=ScannerStatus.d.ts.map

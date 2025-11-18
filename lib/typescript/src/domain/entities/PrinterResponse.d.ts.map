@@ -1,0 +1,1 @@
+{"version":3,"file":"PrinterResponse.d.ts","sourceRoot":"","sources":["../../../../../src/domain/entities/PrinterResponse.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,MAAM,uBAAuB,CAAC;AACjE,OAAO,EAAE,aAAa,EAAE,MAAM,wBAAwB,CAAC;AAEvD,MAAM,WAAW,eAAe;IAC9B,MAAM,EAAE,aAAa,CAAC;IACtB,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,EAAE,mBAAmB,GAAG,IAAI,CAAC;CAClC"}
