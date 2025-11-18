@@ -30,7 +30,7 @@ public final class PaymentParamsExtractor {
             throw new ValidationException("O valor da transação é obrigatório");
         }
 
-        long value = map.getLong("value");
+        long value = map.getInt("value");
 
         if (!InputValidator.isPositive(value)) {
             throw new ValidationException("O valor da transação deve ser maior que zero");
