@@ -1,66 +1,16 @@
 # POS SDK
 
-SDK React Native para integração com terminais POS (Point of Sale) de diferentes administradoras de pagamento. Implementado com Clean Architecture para máxima extensibilidade e manutenibilidade.
-
-## 📦 Instalação
-
-### Via GitHub
-
-```bash
-# Yarn
-yarn add KaueFelipeThums/poc-pos-sdk
-
-# NPM
-npm install KaueFelipeThums/poc-pos-sdk
-
-# Ou especificando uma branch/tag/commit
-yarn add KaueFelipeThums/poc-pos-sdk#main
-yarn add KaueFelipeThums/poc-pos-sdk#v0.1.0
-yarn add KaueFelipeThums/poc-pos-sdk#commit-hash
-```
-
-### Via NPM (quando publicado)
-
-```bash
-# Yarn
-yarn add poc-pos-sdk
-
-# NPM
-npm install poc-pos-sdk
-```
-
-### Configuração Android
-
-Adicione o repositório Maven da Rede no seu `android/build.gradle`:
-
-```gradle
-allprojects {
-    repositories {
-        // ... outros repositórios
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-
-Certifique-se de ter as permissões necessárias no `AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.CAMERA" />
-<uses-permission android:name="android.permission.INTERNET" />
-```
+SDK React Native para integração com terminais POS de diferentes administradoras de pagamento. Implementado com Clean Architecture para máxima extensibilidade e manutenibilidade.
 
 ## 🚀 Inicialização
 
 ### Configuração Básica
 
 ```typescript
-import PosSdk, { PosSdkAdministrator } from '@your-org/poc-pos-sdk';
+import { PosSdk, PosSdkAdministrator } from 'poc-pos-sdk';
 
 // Inicializar o SDK com a administradora desejada
-PosSdk.init(PosSdkAdministrator.REDE);
-
-// Obter instância do SDK
-const sdk = PosSdk.getInstance();
+const sdk = PosSdk.init(PosSdkAdministrator.REDE);
 ```
 
 ### Destruir Instância
@@ -84,7 +34,7 @@ import {
   PaymentType,
   InstallmentType,
   PaymentStatus
-} from '@your-org/poc-pos-sdk';
+} from 'poc-pos-sdk';
 
 const response = await sdk.tef.payment({
   type: PaymentType.CREDIT,
@@ -92,14 +42,15 @@ const response = await sdk.tef.payment({
   installments: 3,
   installmentType: InstallmentType.CREDIT_MERCHANT,
   extras: {
-    redePackageName: 'br.com.sua.aplicacao' // Específico da Rede
+    // Rede
+    redePackageName: 'br.com.sua.aplicacao'
   }
 });
 
 if (response.status === PaymentStatus.SUCCESS) {
   console.log('Pagamento aprovado!');
-  console.log('NSU:', response.data?.nsu);
-  console.log('Código de autorização:', response.data?.authorizationCode);
+  console.log('NSU:', response.data.nsu);
+  console.log('Código de autorização:', response.data.authorizationCode);
 }
 ```
 
