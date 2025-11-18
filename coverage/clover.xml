@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1763471082002" clover="3.2.0">
+  <project timestamp="1763471082002" name="All files">
+    <metrics statements="166" coveredstatements="95" conditionals="33" coveredconditionals="24" methods="41" coveredmethods="25" elements="240" coveredelements="144" complexity="0" loc="166" ncloc="166" packages="9" files="26" classes="26"/>
+    <package name="domain.contracts">
+      <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="IPrinterModule.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/contracts/IPrinterModule.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="0" type="stmt"/>
+      </file>
+      <file name="ITefModule.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/contracts/ITefModule.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain.entities">
+      <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="PaymentRequest.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/entities/PaymentRequest.ts">
+        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+      </file>
+      <file name="PaymentResponse.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/entities/PaymentResponse.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="0" type="stmt"/>
+      </file>
+      <file name="PrinterResponse.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/entities/PrinterResponse.ts">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain.enums">
+      <metrics statements="53" coveredstatements="53" conditionals="18" coveredconditionals="18" methods="9" coveredmethods="9"/>
+      <file name="InstallmentType.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/InstallmentType.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+      </file>
+      <file name="PaymentStatus.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/PaymentStatus.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+      </file>
+      <file name="PaymentType.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/PaymentType.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+      </file>
+      <file name="PosSdkAdministrator.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/PosSdkAdministrator.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="3" type="stmt"/>
+      </file>
+      <file name="PrinterCapabilities.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/PrinterCapabilities.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="6" type="stmt"/>
+      </file>
+      <file name="PrinterStatus.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/PrinterStatus.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+      </file>
+      <file name="ScannerCapabilities.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/ScannerCapabilities.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="6" type="stmt"/>
+      </file>
+      <file name="ScannerStatus.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/ScannerStatus.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+      </file>
+      <file name="TefCapabilities.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/enums/TefCapabilities.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="2" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="domain.exceptions">
+      <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="ModuleUnavailableError.ts" path="/home/kauethums/projects/poc-pos-sdk/src/domain/exceptions/ModuleUnavailableError.ts">
+        <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.adapters">
+      <metrics statements="12" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="no-printer-adapter.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/adapters/no-printer-adapter.ts">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+      </file>
+      <file name="no-scanner-adapter.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/adapters/no-scanner-adapter.ts">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+      </file>
+      <file name="no-tef-adapter.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/adapters/no-tef-adapter.ts">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.adapters.rede">
+      <metrics statements="42" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="0"/>
+      <file name="rede-printer-adapter.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/adapters/rede/rede-printer-adapter.ts">
+        <metrics statements="14" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+      </file>
+      <file name="rede-scanner-adapter.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/adapters/rede/rede-scanner-adapter.ts">
+        <metrics statements="14" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+      </file>
+      <file name="rede-tef-adapter.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/adapters/rede/rede-tef-adapter.ts">
+        <metrics statements="14" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.native">
+      <metrics statements="8" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <file name="rede.ts" path="/home/kauethums/projects/poc-pos-sdk/src/infrastructure/native/rede.ts">
+        <metrics statements="8" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="35" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation">
+      <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="7"/>
+      <file name="PosSdk.ts" path="/home/kauethums/projects/poc-pos-sdk/src/presentation/PosSdk.ts">
+        <metrics statements="27" coveredstatements="27" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="7"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="23" count="28" type="stmt"/>
+        <line num="25" count="28" type="stmt"/>
+        <line num="29" count="27" type="stmt"/>
+        <line num="30" count="27" type="stmt"/>
+        <line num="31" count="27" type="stmt"/>
+        <line num="39" count="28" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="27" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="56" count="5" type="stmt"/>
+        <line num="62" count="5" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="67" count="3" type="stmt"/>
+        <line num="70" count="27" type="stmt"/>
+        <line num="71" count="27" type="stmt"/>
+        <line num="75" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="76" count="3" type="stmt"/>
+        <line num="80" count="3" type="stmt"/>
+        <line num="84" count="59" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.modules">
+      <metrics statements="15" coveredstatements="15" conditionals="3" coveredconditionals="3" methods="9" coveredmethods="9"/>
+      <file name="printer-module.ts" path="/home/kauethums/projects/poc-pos-sdk/src/presentation/modules/printer-module.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="39" type="stmt"/>
+        <line num="10" count="14" type="cond" truecount="3" falsecount="0"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="18" count="9" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+      </file>
+      <file name="scanner-module.ts" path="/home/kauethums/projects/poc-pos-sdk/src/presentation/modules/scanner-module.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="40" type="stmt"/>
+        <line num="9" count="14" type="stmt"/>
+        <line num="13" count="9" type="stmt"/>
+      </file>
+      <file name="tef-module.ts" path="/home/kauethums/projects/poc-pos-sdk/src/presentation/modules/tef-module.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="36" type="stmt"/>
+        <line num="10" count="13" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
