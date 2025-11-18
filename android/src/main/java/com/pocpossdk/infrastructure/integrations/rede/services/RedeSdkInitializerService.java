@@ -27,7 +27,7 @@ public class RedeSdkInitializerService {
   private RedeSdkInitializerService() {
   }
 
-  public static synchronized void initialize(ReactApplicationContext context) throws SdkInitializerException {
+  public static synchronized void initialize(ReactApplicationContext context) {
     if (redeSdkInstance != null) {
       AppLogger.info(TAG, "RedeSdk já inicializado");
       return;

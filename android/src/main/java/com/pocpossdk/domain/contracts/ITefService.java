@@ -8,6 +8,6 @@ import com.pocpossdk.domain.entities.PaymentRequest;
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public interface ITefService {
-  <TExtras> CompletableFuture<PaymentResponse> payment(PaymentRequest<TExtras> paymentRequest);
+public interface ITefService<TResp extends IMappable, TReq> {
+  CompletableFuture<PaymentResponse<TResp>> payment(PaymentRequest<TReq> paymentRequest);
 }

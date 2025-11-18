@@ -13,8 +13,10 @@ import rede.smartrede.commons.contract.IConnectorPrinter;
 import rede.smartrede.commons.printer.PrintAttributes;
 
 import com.pocpossdk.domain.contracts.IPrinterService;
+import com.pocpossdk.domain.contracts.IMappable;
 import com.pocpossdk.domain.contracts.IActivityResultHandler;
 import com.pocpossdk.domain.entities.PrinterResponse;
+import com.pocpossdk.domain.entities.NoExtras;
 import com.pocpossdk.domain.enums.PrinterStatus;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.shared.utils.BitmapUtils;
@@ -24,12 +26,12 @@ import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitialize
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class RedePrinterService implements IPrinterService {
+public class RedePrinterService implements IPrinterService<NoExtras> {
   private static final String TAG = "RedePrinterService";
 
-  public CompletableFuture<PrinterResponse<?>> printImageBase64(String base64Image) {
+  public CompletableFuture<PrinterResponse<NoExtras>> printImageBase64(String base64Image) {
     AppLogger.info(TAG, "Iniciando impressão");
-    CompletableFuture<PrinterResponse<?>> future = new CompletableFuture<>();
+    CompletableFuture<PrinterResponse<NoExtras>> future = new CompletableFuture<>();
 
     try {
       final Bitmap bitmap = BitmapUtils.base64ToBitmap(base64Image);

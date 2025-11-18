@@ -22,6 +22,7 @@ import com.facebook.react.bridge.BaseActivityEventListener;
 
 import com.pocpossdk.domain.contracts.ITefServiceWithActivityHandler;
 import com.pocpossdk.domain.entities.PaymentResponse;
+import com.pocpossdk.domain.entities.NoExtras;
 import com.pocpossdk.domain.entities.PaymentRequest;
 import com.pocpossdk.domain.enums.PaymentStatus;
 import com.pocpossdk.domain.enums.TefCapabilities;
@@ -37,7 +38,7 @@ import com.pocpossdk.infrastructure.integrations.rede.mappers.RedePaymentRequest
  */
 public class RedeTefModule extends ReactContextBaseJavaModule {
   private final String TAG = "RedeTefModule";
-  private final ITefServiceWithActivityHandler tefService;
+  private final ITefServiceWithActivityHandler<NoExtras, RedePaymentExtras> tefService;
 
   public RedeTefModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -67,7 +68,7 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
           })
           .exceptionally(e -> {
             AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
-            PaymentResponse errorResponse = new PaymentResponse<>(
+            PaymentResponse<NoExtras> errorResponse = new PaymentResponse<>(
                 PaymentStatus.UNKNOWN_ERROR,
                 PaymentStatus.UNKNOWN_ERROR.getDescription());
 
@@ -76,13 +77,13 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
           });
     } catch (ValidationException ve) {
       AppLogger.error(TAG, PaymentStatus.INVALID_REQUEST.getDescription() + ": " + ve.getMessage());
-      PaymentResponse errorResponse = new PaymentResponse<>(
+      PaymentResponse<NoExtras> errorResponse = new PaymentResponse<>(
           PaymentStatus.INVALID_REQUEST,
           PaymentStatus.INVALID_REQUEST.getDescription() + ": " + ve.getMessage());
       promise.resolve(errorResponse.toMap());
     } catch (Exception e) {
       AppLogger.error(TAG, PaymentStatus.UNKNOWN_ERROR.getDescription() + ": " + e.getMessage());
-      PaymentResponse errorResponse = new PaymentResponse<>(
+      PaymentResponse<NoExtras> errorResponse = new PaymentResponse<>(
           PaymentStatus.UNKNOWN_ERROR,
           PaymentStatus.UNKNOWN_ERROR.getDescription());
       promise.resolve(errorResponse.toMap());

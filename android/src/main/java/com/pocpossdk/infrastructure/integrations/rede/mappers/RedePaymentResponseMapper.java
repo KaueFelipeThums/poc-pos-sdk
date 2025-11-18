@@ -8,12 +8,13 @@ import com.pocpossdk.infrastructure.integrations.rede.domain.entities.RedePaymen
 import com.pocpossdk.shared.utils.ValueUtils;
 import com.pocpossdk.domain.entities.PaymentResponse;
 import com.pocpossdk.domain.entities.PaymentResponseData;
+import com.pocpossdk.domain.entities.NoExtras;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
 public class RedePaymentResponseMapper {
-  public static PaymentResponse<RedePaymentExtras> map(Payment payment) {
+  public static PaymentResponse<NoExtras> map(Payment payment) {
     if (payment == null) {
       return new PaymentResponse<>(
           PaymentStatus.UNKNOWN_ERROR,
@@ -29,15 +30,15 @@ public class RedePaymentResponseMapper {
 
     PaymentStatus status = RedePaymentStatusMapper.map(payment.getStatus());
 
-    PaymentResponse<RedePaymentExtras> paymentResponse = new PaymentResponse<>(
-          status,
-          status.getDescription());
+    PaymentResponse<NoExtras> paymentResponse = new PaymentResponse<>(
+        status,
+        status.getDescription());
 
-    if(status  == PaymentStatus.SUCCESS) {
+    if (status == PaymentStatus.SUCCESS) {
       String authorizationCode = receipt.getAUTO() != null ? receipt.getAUTO() : receipt.getCV();
       String flag = receipt.getIssuerName() != null ? receipt.getIssuerName() : "PIX";
 
-      PaymentResponseData<RedePaymentExtras> paymentResponseData = new PaymentResponseData<>(
+      PaymentResponseData<NoExtras> paymentResponseData = new PaymentResponseData<>(
           authorizationCode,
           flag,
           ValueUtils.safeString(receipt.getNSU()),

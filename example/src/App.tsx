@@ -1,5 +1,4 @@
 import {
-  InstallmentType,
   PaymentStatus,
   PaymentType,
   PosSdk,
@@ -20,8 +19,7 @@ export default function App() {
         type: PaymentType.DEBIT,
         value: 1000, // INTEGER VALUE IN CENTS (1000 = R$10.00)
         extras: {
-          // REDE
-          redePackageName: 'com.yourapp.package',
+          redePackageName: 'com.example.myapp',
         },
       });
 

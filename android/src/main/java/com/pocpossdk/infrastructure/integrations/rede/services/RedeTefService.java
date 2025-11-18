@@ -14,10 +14,12 @@ import rede.smartrede.sdk.Receipt;
 import rede.smartrede.sdk.PaymentIntentBuilder;
 
 import com.pocpossdk.domain.contracts.ITefServiceWithActivityHandler;
+import com.pocpossdk.domain.contracts.IMappable;
 import com.pocpossdk.domain.entities.PaymentResponse;
 import com.pocpossdk.domain.entities.PaymentRequest;
 import com.pocpossdk.domain.exceptions.TefException;
 import com.pocpossdk.domain.enums.PaymentStatus;
+import com.pocpossdk.domain.entities.NoExtras;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 import com.pocpossdk.infrastructure.integrations.rede.domain.entities.RedePaymentExtras;
@@ -27,19 +29,19 @@ import com.pocpossdk.infrastructure.integrations.rede.mappers.RedePaymentRespons
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class RedeTefService implements ITefServiceWithActivityHandler {
+public class RedeTefService implements ITefServiceWithActivityHandler<NoExtras, RedePaymentExtras> {
   private static final String TAG = "RedeTefService";
   private final ReactApplicationContext context;
   private static final Integer PAYMENT_REQUEST_CODE = 1001;
-  private CompletableFuture<PaymentResponse<RedePaymentExtras>> future;
+  private CompletableFuture<PaymentResponse<NoExtras>> future;
 
   public RedeTefService(ReactApplicationContext context) {
     this.context = context;
   }
 
-  public <TExtras> CompletableFuture<PaymentResponse> payment(PaymentRequest<TExtras> paymentRequest) {
+  public CompletableFuture<PaymentResponse<NoExtras>> payment(PaymentRequest<RedePaymentExtras> paymentRequest) {
     if (future != null && !future.isDone()) {
-      CompletableFuture<PaymentResponse> error = new CompletableFuture<>();
+      CompletableFuture<PaymentResponse<NoExtras>> error = new CompletableFuture<>();
       error.complete(new PaymentResponse<>(
           PaymentStatus.INVALID_REQUEST,
           PaymentStatus.INVALID_REQUEST.getDescription() + ": Já existe uma transação em andamento"));
@@ -60,28 +62,26 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
         throw new TefException("SDK não inicializado");
       }
 
-      PaymentRequest<RedePaymentExtras> redePaymentRequest = (PaymentRequest<RedePaymentExtras>) paymentRequest;
+      RedePaymentExtras redePaymentExtras = paymentRequest.getExtras();
+      RedePayments redePayments = RedeSdkInitializerService.getRedePayments();
+
+      long value = paymentRequest.getValue().longValue();
+      int installments = paymentRequest.getInstallments();
 
       FlexTipoPagamento paymentType = RedePaymentTypeMapper.map(
-          redePaymentRequest.getType(),
-          redePaymentRequest.getInstallments(),
-          redePaymentRequest.getInstallmentType());
+          paymentRequest.getType(),
+          installments,
+          paymentRequest.getInstallmentType());
 
       if (paymentType == null) {
         throw new TefException(
-            "Tipo de pagamento '" + redePaymentRequest.getType().getDescription() + "' não suportado");
+            "Tipo de pagamento '" + paymentRequest.getType().getDescription() + "' não suportado");
       }
 
       if (!paymentType.equals(FlexTipoPagamento.CREDITO_PARCELADO) &&
           !paymentType.equals(FlexTipoPagamento.CREDITO_PARCELADO_EMISSOR)) {
-        redePaymentRequest.setInstallments(0);
+        paymentRequest.setInstallments(0);
       }
-
-      RedePaymentExtras redePaymentExtras = redePaymentRequest.getExtras();
-      RedePayments redePayments = RedeSdkInitializerService.getRedePayments();
-
-      long value = redePaymentRequest.getValue().longValue();
-      int installments = redePaymentRequest.getInstallments();
 
       PaymentIntentBuilder paymentIntentBuilder = redePayments.intentForPaymentBuilder(
           paymentType,
@@ -101,13 +101,14 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
       resolveFuture(unknownErrorResponse());
     }
 
-    return (CompletableFuture<PaymentResponse>) (CompletableFuture<?>) future;
+    return future;
   }
 
   private void handlePaymentResponse(Intent data) {
     try {
       Payment payment = RedePayments.getPaymentFromIntent(data);
-      PaymentResponse<RedePaymentExtras> paymentResponse = RedePaymentResponseMapper.map(payment);
+
+      PaymentResponse<NoExtras> paymentResponse = RedePaymentResponseMapper.map(payment);
 
       AppLogger.info(TAG, "Processamento do pagamento concluído");
       resolveFuture(paymentResponse);
@@ -139,13 +140,13 @@ public class RedeTefService implements ITefServiceWithActivityHandler {
         PaymentStatus.UNKNOWN_ERROR.getDescription()));
   }
 
-  private PaymentResponse<RedePaymentExtras> unknownErrorResponse() {
+  private PaymentResponse<NoExtras> unknownErrorResponse() {
     return new PaymentResponse<>(
         PaymentStatus.UNKNOWN_ERROR,
         PaymentStatus.UNKNOWN_ERROR.getDescription());
   }
 
-  private void resolveFuture(PaymentResponse<RedePaymentExtras> response) {
+  private void resolveFuture(PaymentResponse<NoExtras> response) {
     if (future != null && !future.isDone()) {
       future.complete(response);
     }

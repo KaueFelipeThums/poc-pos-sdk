@@ -8,6 +8,6 @@ import com.pocpossdk.domain.contracts.IMappable;
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public interface IPrinterService {
-  <TData extends IMappable> CompletableFuture<PrinterResponse<TData>> printImageBase64(String base64Image);
+public interface IPrinterService<TResp extends IMappable> {
+  CompletableFuture<PrinterResponse<TResp>> printImageBase64(String base64Image);
 }

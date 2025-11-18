@@ -10,6 +10,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 import com.pocpossdk.domain.contracts.IPrinterService;
+import com.pocpossdk.domain.entities.NoExtras;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedePrinterService;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
@@ -22,7 +23,7 @@ import com.pocpossdk.domain.enums.PrinterCapabilities;
  */
 public class RedePrinterModule extends ReactContextBaseJavaModule {
   private final String TAG = "RedePrinterModule";
-  private final IPrinterService printerService;
+  private final IPrinterService<NoExtras> printerService;
 
   public RedePrinterModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -47,7 +48,7 @@ public class RedePrinterModule extends ReactContextBaseJavaModule {
           promise.resolve(result.toMap());
         })
         .exceptionally(e -> {
-          PrinterResponse<?> errorResponse = new PrinterResponse<>(
+          PrinterResponse<NoExtras> errorResponse = new PrinterResponse<>(
               PrinterStatus.UNKNOWN_ERROR,
               PrinterStatus.UNKNOWN_ERROR.getDescription());
 
