@@ -1,4 +1,3 @@
-// Mock dos adaptadores Rede para evitar dependência de NativeModules
 jest.mock('@/infrastructure/adapters/rede/rede-tef-adapter', () => {
   const { MockTefAdapter } = jest.requireActual('../__mocks__/adapters.mock');
   return {

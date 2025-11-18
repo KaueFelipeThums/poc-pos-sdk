@@ -105,12 +105,10 @@ describe('PosSdk - Testes de Integração', () => {
       const paymentResponse = await sdk.tef.payment(payment);
       expect(paymentResponse.status).toBe(PaymentStatus.SUCCESS);
 
-      // Terceira operação: impressão
       const printResponse =
         await sdk.printer.printImageBase64('base64-mock-image');
       expect(printResponse.status).toBe(PrinterStatus.SUCCESS);
 
-      // Quarta operação: outro scan
       const scan2 = await sdk.scanner.scan();
       expect(scan2.status).toBe(ScannerStatus.SUCCESS);
     });
@@ -151,7 +149,6 @@ describe('PosSdk - Testes de Integração', () => {
     it('deve validar entrada antes de processar', async () => {
       const sdk = PosSdk.init(PosSdkAdministrator.REDE);
 
-      // Tentar imprimir com base64 vazio
       const printResponse = await sdk.printer.printImageBase64('');
 
       expect(printResponse.status).toBe(PrinterStatus.INVALID_PARAM);
@@ -161,14 +158,11 @@ describe('PosSdk - Testes de Integração', () => {
     it('deve manter estado consistente após erro', async () => {
       const sdk = PosSdk.init(PosSdkAdministrator.REDE);
 
-      // Operação com erro
       await sdk.printer.printImageBase64('');
 
-      // Operação normal após erro
       const scanResponse = await sdk.scanner.scan();
       expect(scanResponse.status).toBe(ScannerStatus.SUCCESS);
 
-      // Outra operação normal
       const printResponse = await sdk.printer.printImageBase64('valid-base64');
       expect(printResponse.status).toBe(PrinterStatus.SUCCESS);
     });
@@ -181,7 +175,6 @@ describe('PosSdk - Testes de Integração', () => {
 
       expect(sdk1).toBe(sdk2);
 
-      // Operações devem afetar a mesma instância
       const capabilities1 = await sdk1.getAllCapabilities();
       const capabilities2 = await sdk2.getAllCapabilities();
 
