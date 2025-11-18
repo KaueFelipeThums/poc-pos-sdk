@@ -1,7 +1,6 @@
 import type { IPrinterModule } from '@/domain/contracts/IPrinterModule';
 import type { IScannerModule } from '@/domain/contracts/IScannerModule';
 import type { ITefModule } from '@/domain/contracts/ITefModule';
-import type { IExtras } from '@/domain/entities/IExtras';
 import type { PaymentRequest } from '@/domain/entities/PaymentRequest';
 import type { PaymentResponse } from '@/domain/entities/PaymentResponse';
 import type { PrinterResponse } from '@/domain/entities/PrinterResponse';
@@ -14,10 +13,7 @@ import { ScannerStatus } from '@/domain/enums/ScannerStatus';
 import { TefCapabilities } from '@/domain/enums/TefCapabilities';
 
 export class MockTefAdapter implements ITefModule {
-  async payment<
-    TExtras extends IExtras = IExtras,
-    TRExtras extends IExtras = IExtras,
-  >(request: PaymentRequest<TExtras>): Promise<PaymentResponse<TRExtras>> {
+  async payment(request: PaymentRequest): Promise<PaymentResponse> {
     return {
       status: PaymentStatus.SUCCESS,
       message: 'Pagamento realizado com sucesso',
@@ -34,7 +30,7 @@ export class MockTefAdapter implements ITefModule {
         },
         extras: null,
       },
-    } as PaymentResponse<TRExtras>;
+    } as PaymentResponse;
   }
 
   getCapabilities(): TefCapabilities[] {
@@ -43,15 +39,13 @@ export class MockTefAdapter implements ITefModule {
 }
 
 export class MockPrinterAdapter implements IPrinterModule {
-  async printImageBase64<TData extends IExtras = IExtras>(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _base64Image: string
-  ): Promise<PrinterResponse<TData>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async printImageBase64(_base64Image: string): Promise<PrinterResponse> {
     return {
       status: PrinterStatus.SUCCESS,
       message: 'Impressão realizada com sucesso',
       data: null,
-    } as PrinterResponse<TData>;
+    } as PrinterResponse;
   }
 
   getCapabilities(): PrinterCapabilities[] {
@@ -74,16 +68,13 @@ export class MockScannerAdapter implements IScannerModule {
 }
 
 export class MockTefAdapterWithError implements ITefModule {
-  async payment<
-    TExtras extends IExtras = IExtras,
-    TRExtras extends IExtras = IExtras,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  >(_request: PaymentRequest<TExtras>): Promise<PaymentResponse<TRExtras>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async payment(_request: PaymentRequest): Promise<PaymentResponse> {
     return {
       status: PaymentStatus.FAILED,
       message: 'Erro ao processar pagamento',
       data: null,
-    } as PaymentResponse<TRExtras>;
+    } as PaymentResponse;
   }
 
   getCapabilities(): TefCapabilities[] {
@@ -92,15 +83,13 @@ export class MockTefAdapterWithError implements ITefModule {
 }
 
 export class MockPrinterAdapterWithError implements IPrinterModule {
-  async printImageBase64<TData extends IExtras = IExtras>(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _base64Image: string
-  ): Promise<PrinterResponse<TData>> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async printImageBase64(_base64Image: string): Promise<PrinterResponse> {
     return {
       status: PrinterStatus.UNKNOWN_ERROR,
       message: 'Erro ao imprimir',
       data: null,
-    } as PrinterResponse<TData>;
+    } as PrinterResponse;
   }
 
   getCapabilities(): PrinterCapabilities[] {

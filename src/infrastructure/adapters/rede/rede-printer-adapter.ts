@@ -1,19 +1,30 @@
 import type { IPrinterModule } from '../../../domain/contracts/IPrinterModule';
-import type { IExtras } from '../../../domain/entities/IExtras';
 import type { PrinterResponse } from '../../../domain/entities/PrinterResponse';
 import type { PrinterCapabilities } from '../../../domain/enums/PrinterCapabilities';
+import { PrinterStatus } from '../../../domain/enums/PrinterStatus';
+import { ModuleUnavailableError } from '../../../domain/exceptions/ModuleUnavailableError';
 import { RedePrinterNative } from '../../native/rede';
 
 export class RedePrinterAdapter implements IPrinterModule {
-  async printImageBase64<TData extends IExtras = IExtras>(
-    base64Image: string
-  ): Promise<PrinterResponse<TData>> {
+  async printImageBase64(base64Image: string): Promise<PrinterResponse> {
     try {
       const jsonResponse =
         await RedePrinterNative.printImageBase64(base64Image);
-      return jsonResponse as PrinterResponse<TData>;
+      return jsonResponse as PrinterResponse;
     } catch (error) {
-      throw new Error(`Erro ao imprimir imagem: ${error}`);
+      if (error instanceof ModuleUnavailableError) {
+        return {
+          status: PrinterStatus.MODULE_NOT_AVAILABLE,
+          message: `Este método não está disponível.`,
+          data: null,
+        };
+      }
+
+      return {
+        status: PrinterStatus.UNKNOWN_ERROR,
+        message: `Houve um erro ao tentar imprimir a imagem.`,
+        data: null,
+      };
     }
   }
 

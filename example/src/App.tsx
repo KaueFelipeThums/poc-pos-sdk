@@ -16,17 +16,12 @@ export default function App() {
     const makePayment = async () => {
       const response = await sdkInstance.tef.payment({
         installments: 1,
-        installmentType: InstallmentType.CREDIT_ISSUER,
+        installmentType: null,
         type: PaymentType.DEBIT,
         value: 1000, // INTEGER VALUE IN CENTS (1000 = R$10.00)
         extras: {
           // REDE
-          redePackageName: 'com.example.app',
-
-          // CLOVER
-          cloverCnpj: '12345678000195',
-          cloverTerminalId: '12345678',
-          cloverStoreId: '123456789',
+          redePackageName: 'com.yourapp.package',
         },
       });
 

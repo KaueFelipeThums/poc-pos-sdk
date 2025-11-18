@@ -16,7 +16,6 @@ export type { PaymentResponse } from './domain/entities/PaymentResponse';
 export type { PaymentResponseData } from './domain/entities/PaymentResponseData';
 export type { PrinterResponse } from './domain/entities/PrinterResponse';
 export type { ScannerResponse } from './domain/entities/ScannerResponse';
-export type { IExtras } from './domain/entities/IExtras';
 export type { Receipt } from './domain/valueObjects/Receipt';
 
 export type { ITefModule } from './domain/contracts/ITefModule';

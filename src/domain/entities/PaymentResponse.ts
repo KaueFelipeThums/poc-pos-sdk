@@ -1,4 +1,3 @@
-import type { IExtras } from './IExtras';
 import type { PaymentResponseData } from './PaymentResponseData';
 import { PaymentStatus } from '../enums/PaymentStatus';
 
@@ -8,12 +7,10 @@ type PaymentResponseError = {
   data: null;
 };
 
-type PaymentResponseSuccess<TExtras extends IExtras> = {
+type PaymentResponseSuccess = {
   status: PaymentStatus.SUCCESS;
   message: string;
-  data: PaymentResponseData<TExtras>;
+  data: PaymentResponseData;
 };
 
-export type PaymentResponse<TExtras extends IExtras = IExtras> =
-  | PaymentResponseSuccess<TExtras>
-  | PaymentResponseError;
+export type PaymentResponse = PaymentResponseSuccess | PaymentResponseError;

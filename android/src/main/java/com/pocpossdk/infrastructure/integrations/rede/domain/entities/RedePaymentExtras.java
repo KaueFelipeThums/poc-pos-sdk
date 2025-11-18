@@ -10,7 +10,7 @@ import com.pocpossdk.domain.contracts.IMappable;
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
  */
-public class RedePaymentExtras implements IMappable {
+public class RedePaymentExtras {
   private @NonNull String packageName;
 
   public RedePaymentExtras(@NonNull String packageName) {
@@ -23,12 +23,5 @@ public class RedePaymentExtras implements IMappable {
 
   public void setPackageName(@NonNull String packageName) {
     this.packageName = packageName;
-  }
-
-  @Override
-  public WritableMap toMap() {
-    WritableMap map = Arguments.createMap();
-    map.putString("packageName", packageName);
-    return map;
   }
 }

@@ -53,11 +53,11 @@ export class PosSdkInstance {
   }
 
   async getAllCapabilities() {
-    const [tef, printer, scanner] = await Promise.all([
+    const [tef, printer, scanner] = [
       this.tef.getCapabilities(),
       this.printer.getCapabilities(),
       this.scanner.getCapabilities(),
-    ]);
+    ];
 
     return { tef, printer, scanner, administrator: this.administrator };
   }

@@ -13,7 +13,6 @@ import com.pocpossdk.domain.contracts.IScannerService;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeScannerService;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
-import com.pocpossdk.domain.exceptions.SdkInitializerException;
 import com.pocpossdk.domain.entities.ScannerResponse;
 import com.pocpossdk.domain.enums.ScannerStatus;
 import com.pocpossdk.domain.enums.ScannerCapabilities;
@@ -28,14 +27,8 @@ public class RedeScannerModule extends ReactContextBaseJavaModule {
   public RedeScannerModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
-    try {
-      if (!RedeSdkInitializerService.isInitialized()) {
-        RedeSdkInitializerService.initialize(reactContext);
-      }
-    } catch (SdkInitializerException e) {
-      AppLogger.error(TAG, "Falha na inicialização do SDK: " + e.getMessage());
-    } catch (Exception e) {
-      AppLogger.error(TAG, "Erro inesperado na inicialização: " + e.getMessage());
+    if (!RedeSdkInitializerService.isInitialized()) {
+      RedeSdkInitializerService.initialize(reactContext);
     }
 
     this.scannerService = new RedeScannerService(reactContext);

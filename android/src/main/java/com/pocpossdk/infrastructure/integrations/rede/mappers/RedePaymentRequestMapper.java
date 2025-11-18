@@ -18,7 +18,7 @@ import com.pocpossdk.shared.utils.PaymentParamsExtractor;
 public class RedePaymentRequestMapper {
   public static PaymentRequest<RedePaymentExtras> map(@NonNull ReadableMap map) throws ValidationException {
 
-    if(!InputValidator.isNonNull(map)) {
+    if (!InputValidator.isNonNull(map)) {
       throw new ValidationException("Os dados da transação não foram informados");
     }
 
@@ -27,13 +27,17 @@ public class RedePaymentRequestMapper {
     Integer installments = PaymentParamsExtractor.extractInstallments(map);
     InstallmentType installmentType = PaymentParamsExtractor.extractInstallmentType(map);
 
-    if(!map.hasKey("extras") || !InputValidator.isNonNull(map.getMap("extras"))) {
+    if (type == PaymentType.CREDIT && installmentType == null) {
+      throw new ValidationException("O tipo de parcelamento é obrigatório para crédito");
+    }
+
+    if (!map.hasKey("extras") || !InputValidator.isNonNull(map.getMap("extras"))) {
       throw new ValidationException("Configurações adicionais são obrigatórias");
     }
 
     ReadableMap extrasMap = map.getMap("extras");
 
-    if(!extrasMap.hasKey("redePackageName") || !InputValidator.isNonEmpty(extrasMap.getString("redePackageName"))) {
+    if (!extrasMap.hasKey("redePackageName") || !InputValidator.isNonEmpty(extrasMap.getString("redePackageName"))) {
       throw new ValidationException("O nome do pacote da Rede é obrigatório");
     }
 

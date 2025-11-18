@@ -13,14 +13,14 @@ public class PaymentRequest<TExtras> {
   private @NonNull PaymentType type;
   private @NonNull Long value;
   private @NonNull Integer installments;
-  private @NonNull InstallmentType installmentType;
+  private @Nullable InstallmentType installmentType;
   private @Nullable TExtras extras;
 
   public PaymentRequest(
       @NonNull PaymentType type,
       @NonNull Long value,
       @NonNull Integer installments,
-      @NonNull InstallmentType installmentType,
+      @Nullable InstallmentType installmentType,
       @Nullable TExtras extras) {
     this.installments = installments;
     this.value = value;
@@ -33,7 +33,7 @@ public class PaymentRequest<TExtras> {
       @NonNull PaymentType type,
       @NonNull Long value,
       @NonNull Integer installments,
-      @NonNull InstallmentType installmentType) {
+      @Nullable InstallmentType installmentType) {
     this(type, value, installments, installmentType, null);
   }
 
@@ -45,12 +45,20 @@ public class PaymentRequest<TExtras> {
     this.installments = installments;
   }
 
-  public @Nullable Long getValue() {
+  public @NonNull Long getValue() {
     return value;
   }
 
-  public void setValue(@Nullable Long value) {
+  public void setValue(@NonNull Long value) {
     this.value = value;
+  }
+
+  public @NonNull PaymentType getType() {
+    return type;
+  }
+
+  public void setType(@NonNull PaymentType type) {
+    this.type = type;
   }
 
   public @Nullable InstallmentType getInstallmentType() {
@@ -59,14 +67,6 @@ public class PaymentRequest<TExtras> {
 
   public void setInstallmentType(@Nullable InstallmentType installmentType) {
     this.installmentType = installmentType;
-  }
-
-  public @Nullable PaymentType getType() {
-    return type;
-  }
-
-  public void setType(@Nullable PaymentType type) {
-    this.type = type;
   }
 
   public @Nullable TExtras getExtras() {

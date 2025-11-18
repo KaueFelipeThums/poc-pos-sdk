@@ -21,7 +21,7 @@ public final class PaymentParamsExtractor {
             String value = map.getString("type");
             return PaymentType.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new ValidationException("Tipo de pagamento não reconhecido. Use: CREDIT, DEBIT ou PIX");
+            throw new ValidationException("Tipo de pagamento inválido");
         }
     }
 
@@ -37,24 +37,25 @@ public final class PaymentParamsExtractor {
         }
 
         return value;
-    }    public static Integer extractInstallments(@NonNull ReadableMap map) {
+    }
+
+    public static Integer extractInstallments(@NonNull ReadableMap map) {
         if (!map.hasKey("installments")) {
             return 0;
         }
         return map.getInt("installments");
     }
 
-
     public static InstallmentType extractInstallmentType(@NonNull ReadableMap map) throws ValidationException {
         if (!map.hasKey("installmentType") || map.getString("installmentType") == null) {
-            throw new ValidationException("O tipo de parcelamento é obrigatório");
+            return null;
         }
 
         try {
             String value = map.getString("installmentType");
             return InstallmentType.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new ValidationException("Tipo de parcelamento não reconhecido. Use: CREDIT_MERCHANT ou CREDIT_ISSUER");
+            throw new ValidationException("Tipo de parcelamento inválido");
         }
     }
 }

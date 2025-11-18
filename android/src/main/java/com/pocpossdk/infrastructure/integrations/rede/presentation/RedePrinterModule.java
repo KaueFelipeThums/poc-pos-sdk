@@ -13,7 +13,6 @@ import com.pocpossdk.domain.contracts.IPrinterService;
 import com.pocpossdk.shared.utils.AppLogger;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedePrinterService;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
-import com.pocpossdk.domain.exceptions.SdkInitializerException;
 import com.pocpossdk.domain.entities.PrinterResponse;
 import com.pocpossdk.domain.enums.PrinterStatus;
 import com.pocpossdk.domain.enums.PrinterCapabilities;
@@ -28,14 +27,8 @@ public class RedePrinterModule extends ReactContextBaseJavaModule {
   public RedePrinterModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
-    try {
-      if (!RedeSdkInitializerService.isInitialized()) {
-        RedeSdkInitializerService.initialize(reactContext);
-      }
-    } catch (SdkInitializerException e) {
-      AppLogger.error(TAG, "Falha na inicialização do SDK: " + e.getMessage());
-    } catch (Exception e) {
-      AppLogger.error(TAG, "Erro inesperado na inicialização: " + e.getMessage());
+    if (!RedeSdkInitializerService.isInitialized()) {
+      RedeSdkInitializerService.initialize(reactContext);
     }
 
     this.printerService = new RedePrinterService();

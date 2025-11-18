@@ -1,7 +1,7 @@
-import type { IExtras } from './IExtras';
+import type { PaymentResponseDataExtras } from './PaymentResponseDataExtras';
 import type { Receipt } from '../valueObjects/Receipt';
 
-export interface PaymentResponseData<TExtras extends IExtras = IExtras> {
+export interface PaymentResponseData {
   authorizationCode: string;
   flag: string;
   nsu: string;
@@ -9,5 +9,5 @@ export interface PaymentResponseData<TExtras extends IExtras = IExtras> {
   cv: string;
   cnpj: string;
   receipt: Receipt | null;
-  extras: TExtras | null;
+  extras: PaymentResponseDataExtras | null;
 }

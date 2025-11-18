@@ -1,8 +1,8 @@
-import type { IExtras } from './IExtras';
+import type { PrinterResponseData } from './PrinterResponseData';
 import { PrinterStatus } from '../enums/PrinterStatus';
 
-export interface PrinterResponse<TData extends IExtras = IExtras> {
+export interface PrinterResponse {
   status: PrinterStatus;
   message: string;
-  data: TData | null;
+  data: PrinterResponseData | null;
 }

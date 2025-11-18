@@ -1,6 +1,8 @@
 import type { IScannerModule } from '../../../domain/contracts/IScannerModule';
 import type { ScannerResponse } from '../../../domain/entities/ScannerResponse';
 import type { ScannerCapabilities } from '../../../domain/enums/ScannerCapabilities';
+import { ScannerStatus } from '../../../domain/enums/ScannerStatus';
+import { ModuleUnavailableError } from '../../../domain/exceptions/ModuleUnavailableError';
 import { RedeScannerNative } from '../../native/rede';
 
 export class RedeScannerAdapter implements IScannerModule {
@@ -9,7 +11,19 @@ export class RedeScannerAdapter implements IScannerModule {
       const jsonResponse = await RedeScannerNative.scan();
       return jsonResponse as ScannerResponse;
     } catch (error) {
-      throw new Error(`Erro ao escanear: ${error}`);
+      if (error instanceof ModuleUnavailableError) {
+        return {
+          status: ScannerStatus.MODULE_NOT_AVAILABLE,
+          message: `Este método não está disponível.`,
+          data: null,
+        };
+      }
+
+      return {
+        status: ScannerStatus.UNKNOWN_ERROR,
+        message: `Houve um erro ao tentar escanear.`,
+        data: null,
+      };
     }
   }
 
@@ -17,8 +31,8 @@ export class RedeScannerAdapter implements IScannerModule {
     try {
       const capabilities = RedeScannerNative.getCapabilities();
       return capabilities as ScannerCapabilities[];
-    } catch (error) {
-      throw new Error(`Erro ao obter capabilities: ${error}`);
+    } catch {
+      return [];
     }
   }
 }

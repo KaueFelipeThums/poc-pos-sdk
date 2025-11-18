@@ -31,7 +31,6 @@ import com.pocpossdk.infrastructure.integrations.rede.services.RedeTefService;
 import com.pocpossdk.infrastructure.integrations.rede.services.RedeSdkInitializerService;
 import com.pocpossdk.infrastructure.integrations.rede.domain.entities.RedePaymentExtras;
 import com.pocpossdk.infrastructure.integrations.rede.mappers.RedePaymentRequestMapper;
-import com.pocpossdk.domain.exceptions.SdkInitializerException;
 
 /**
  * @author Kaue Thums <kaue.thums@zucchetti.com>
@@ -43,14 +42,8 @@ public class RedeTefModule extends ReactContextBaseJavaModule {
   public RedeTefModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
-    try {
-      if (!RedeSdkInitializerService.isInitialized()) {
-        RedeSdkInitializerService.initialize(reactContext);
-      }
-    } catch (SdkInitializerException e) {
-      AppLogger.error(TAG, "Falha na inicialização do SDK: " + e.getMessage());
-    } catch (Exception e) {
-      AppLogger.error(TAG, "Erro inesperado na inicialização: " + e.getMessage());
+    if (!RedeSdkInitializerService.isInitialized()) {
+      RedeSdkInitializerService.initialize(reactContext);
     }
 
     this.tefService = new RedeTefService(reactContext);

@@ -2,8 +2,7 @@ import { NativeModules } from 'react-native';
 import type { IPrinterModule } from '../../domain/contracts/IPrinterModule';
 import type { IScannerModule } from '../../domain/contracts/IScannerModule';
 import type { ITefModule } from '../../domain/contracts/ITefModule';
-
-const ERROR = 'O pacote não está vinculado corretamente.';
+import { ModuleUnavailableError } from '../../domain/exceptions/ModuleUnavailableError';
 
 export const RedePrinterNative = NativeModules.RedePrinterModule
   ? (NativeModules.RedePrinterModule as IPrinterModule)
@@ -11,7 +10,7 @@ export const RedePrinterNative = NativeModules.RedePrinterModule
       {},
       {
         get() {
-          throw new Error(ERROR);
+          throw new ModuleUnavailableError('RedePrinterModule');
         },
       }
     ) as IPrinterModule);
@@ -22,7 +21,7 @@ export const RedeTefNative = NativeModules.RedeTefModule
       {},
       {
         get() {
-          throw new Error(ERROR);
+          throw new ModuleUnavailableError('RedeTefModule');
         },
       }
     ) as ITefModule);
@@ -33,7 +32,7 @@ export const RedeScannerNative = NativeModules.RedeScannerModule
       {},
       {
         get() {
-          throw new Error(ERROR);
+          throw new ModuleUnavailableError('RedeScannerModule');
         },
       }
     ) as IScannerModule);

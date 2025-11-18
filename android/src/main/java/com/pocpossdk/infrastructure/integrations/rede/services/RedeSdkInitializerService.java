@@ -44,7 +44,6 @@ public class RedeSdkInitializerService {
       AppLogger.info(TAG, "RedeSdk inicializado com sucesso");
     } catch (Exception e) {
       AppLogger.error(TAG, "Erro ao inicializar RedeSdk: " + e.getMessage());
-      throw new SdkInitializerException("Falha na inicialização do RedeSdk", e);
     }
   }
 
