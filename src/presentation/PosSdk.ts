@@ -74,7 +74,7 @@ export class PosSdk {
   static getInstance(): PosSdkInstance {
     if (!this.instance) {
       throw new Error(
-        'PosSdk não foi inicializado. Chame PosSdk.init() primeiro.'
+        'PosSdk não foi inicializado.'
       );
     }
     return this.instance;
